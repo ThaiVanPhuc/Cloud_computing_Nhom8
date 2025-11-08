@@ -49,13 +49,23 @@ class ProductController {
 
   async updateProduct(req, res) {
     try {
+      const updateData = { ...req.body };
+
+      if (req.file) {
+        updateData.Img = `/uploads/${req.file.filename}`;
+      }
+
+      delete updateData._id;
+
       const updatedProduct = await Product.findByIdAndUpdate(
         req.params.id,
-        req.body,
+        updateData,
         { new: true }
       );
+
       if (!updatedProduct)
         return res.status(404).json({ message: "Product not found" });
+
       res.json(updatedProduct);
     } catch (error) {
       console.error("Update Product Error:", error);
