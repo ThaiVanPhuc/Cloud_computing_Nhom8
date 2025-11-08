@@ -1,0 +1,86 @@
+.login-container {
+    display: flex;
+    width: 800px;
+    height: 500px;
+    margin: 50px auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(247, 183, 154);
+  }
+  
+  .login-image {
+    flex: 1;
+    background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20231225/pngtree-dark-abstract-technological-texture-image_13897245.png');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .login-form {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-top: 10px;
+    color: #413e3e;
+  }
+  
+  input {
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #b3b0b0;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #7c7877;
+    color: #f5f3f3;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #141414;
+  }
+  
+  p {
+    margin-top: 20px;
+    font-size: 14px;
+    
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .login-container {
+      flex-direction: column;
+      width: 90%;
+      height: auto;
+    }
+  
+    .login-image {
+      display: none;
+    }
+  
+    .login-form {
+      padding: 20px;
+    }
+  }
+  
