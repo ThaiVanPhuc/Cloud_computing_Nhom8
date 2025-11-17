@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./New.module.scss";
 import * as newsServices from "../../../services/newServices";
 import { getImageUrl } from "../../../utils/image";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 const AdminNewsPage = () => {
     const [newsList, setNewsList] = useState([]);
@@ -158,8 +159,15 @@ const AdminNewsPage = () => {
                             </td>
                             <td>{new Date(item.createdAt).toLocaleDateString()}</td>
                             <td>
-                                <button className={styles.editBtn} onClick={() => handleEdit(item)}>Edit</button>
-                                <button className={styles.deleteBtn} onClick={() => confirmDelete(item)}>Delete</button>
+
+                                <button className={styles.iconBtn} onClick={() => handleEdit(item)}>
+                                    <FaEdit className={styles.editIcon} />
+                                </button>
+
+                                <button className={styles.iconBtn} onClick={() => handleDelete(item)}>
+                                    <FaTrash className={styles.deleteIcon} />
+                                </button>
+
                             </td>
                         </tr>
                     ))}

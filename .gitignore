@@ -18,3 +18,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
+front-end/src/utils/httpRequest.js
+=======
+>>>>>>> b4608e7106536be1cf0e4112a2ec967fd8035dc6

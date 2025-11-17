@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Users.module.scss";
 import * as userServices from "../../../services/userServices";
+import { FaEdit, FaTrash, FaUserPlus } from "react-icons/fa";
 
 const AdminUserPage = () => {
     const [users, setUsers] = useState([]);
@@ -130,7 +131,10 @@ const AdminUserPage = () => {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>User Management</h1>
-            <button className={styles.addBtn} onClick={handleAddUserClick}>Thêm User</button>
+            <button className={styles.addBtn} onClick={handleAddUserClick}>
+                <FaUserPlus /> Thêm User
+            </button>
+
 
             <table className={styles.table}>
                 <thead>
@@ -150,8 +154,13 @@ const AdminUserPage = () => {
                             <td>{user.email}</td>
                             <td>{user.role}</td>
                             <td>
-                                <button className={styles.editBtn} onClick={() => handleEdit(user)}>Edit</button>
-                                <button className={styles.deleteBtn} onClick={() => confirmDelete(user)}>Delete</button>
+                                <button className={styles.iconBtn} onClick={() => handleEdit(user)}>
+                                    <FaEdit className={styles.editIcon} />
+                                </button>
+                                <button className={styles.iconBtn} onClick={() => confirmDelete(user)}>
+                                    <FaTrash className={styles.deleteIcon} />
+                                </button>
+
                             </td>
                         </tr>
                     ))}
