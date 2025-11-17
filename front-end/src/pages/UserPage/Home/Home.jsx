@@ -62,13 +62,13 @@ const Home = ({ addtocart }) => {
       btnLink: "/product",
     },
     {
-      img: "https://img.pikbest.com/ai/illus_our/20230427/7aa4e43a48c28685ed3c28d782d41414.jpg!w700wp", // luxury office
+      img: "https://img.pikbest.com/ai/illus_our/20230427/7aa4e43a48c28685ed3c28d782d41414.jpg!sw800", // luxury office
       desc: "Upgrade your home office with premium gadgets.",
       btnText: "Explore",
       btnLink: "/product",
     },
     {
-      img: "https://img.lovepik.com/bg/20240225/Immerse-Yourself-3D-Rendered-Music-App-on-Smartphone-with-Headphones_3698741_wh300.jpg", // luxury device
+      img: "https://img.pikbest.com/wp/202346/pink-pastel-background-featuring-a-3d-rendered-laptop-computer_9633799.jpg!sw800", // luxury device
       desc: "Smartphones, headphones, tablets & more in style.",
       btnText: "Discover",
       btnLink: "/product",
@@ -420,7 +420,7 @@ const Home = ({ addtocart }) => {
                 "https://img.pikbest.com/ai/illus_our/20230526/daf2c59f0ddb664241a5c3401dcf4b55.jpg!sw800",
                 "https://img.pikbest.com/wp/202346/cladding-headphone-clad-smartphone-displays-3d-rendered-music-application-against-pink-backdrop_9626996.jpg!bw700",
                 "https://img.pikbest.com/wp/202346/cladding-headphone-clad-smartphone-displaying-3d-rendered-music-app-against-pink-backdrop_9626905.jpg!bw700",
-                "https://png.pngtree.com/thumb_back/fh260/background/20231001/pngtree-d-rendering-of-a-pink-retro-personal-computer-with-system-unit-image_13527391.png",
+                "https://img.pikbest.com/wp/202346/pink-pastel-background-featuring-a-3d-rendered-laptop-computer_9633799.jpg!sw800",
                 "https://image.slidesdocs.com/responsive-images/background/sleek-white-gaming-keyboard-featuring-dynamic-rgb-lights-in-striking-3d-render-powerpoint-background_00277d3707__960_540.jpg",
                 "https://image.slidesdocs.com/responsive-images/background/click-search-information-computer-concept-for-seo-and-web-analytics-on-a-pastel-pink-3d-rendered-illustration-powerpoint-background_5b2dd96804__960_540.jpg",
               ].map((img, index) => (

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link } from "react-router-dom";
 import httpRequest from "../../../utils/httpRequest";
 import "./cart.css";
 import { getImageUrl } from "../../../utils/image";
 
 const Cart = ({ setCart }) => {
   const [cart, setCartState] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);
   const [error, setError] = useState("");
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showToast, setShowToast] = useState(false); // State toast
   const [userInfo, setUserInfo] = useState({
     name: "",
     address: "",
@@ -31,6 +32,12 @@ const Cart = ({ setCart }) => {
     };
     fetchCart();
   }, []);
+
+  const toggleSelect = (id) => {
+    setSelectedProducts((prev) =>
+      prev.includes(id) ? prev.filter((pid) => pid !== id) : [...prev, id]
+    );
+  };
 
   const incqty = async (productId) => {
     try {
@@ -63,19 +70,24 @@ const Cart = ({ setCart }) => {
         ? response.data.items.filter((item) => item.product)
         : [];
       setCartState(validCart);
+      setSelectedProducts((prev) => prev.filter((id) => id !== productId));
     } catch (err) {
       console.error("Lỗi khi xóa sản phẩm:", err);
     }
   };
 
-  // Lọc các item hợp lệ trước khi tính tổng
   const validCart = cart.filter((item) => item.product);
-  const Totalprice = validCart.reduce(
-    (price, item) => price + item.qty * item.product.Price,
-    0
-  );
+
+  const totalSelected = validCart
+    .filter((item) => selectedProducts.includes(item.product._id))
+    .reduce((sum, item) => sum + item.qty * item.product.Price, 0);
 
   const handlePayment = () => {
+    if (selectedProducts.length === 0) {
+      setError("Vui lòng chọn sản phẩm cần thanh toán!");
+      return;
+    }
+    setError("");
     setShowPaymentModal(true);
   };
 
@@ -87,13 +99,8 @@ const Cart = ({ setCart }) => {
   const isValidPhone = (phone) => /^0[0-9]{9}$/.test(phone);
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  const handlePayOnDelivery = () => {
-    if (
-      !userInfo.name ||
-      !userInfo.address ||
-      !userInfo.phone ||
-      !userInfo.email
-    ) {
+  const handlePayOnDelivery = async () => {
+    if (!userInfo.name || !userInfo.address || !userInfo.phone || !userInfo.email) {
       setError("Vui lòng điền đầy đủ thông tin!");
       return;
     }
@@ -106,132 +113,107 @@ const Cart = ({ setCart }) => {
       return;
     }
 
-    setError("");
-    setShowPaymentModal(false);
-    setCartState([]); // Clear cart
+    try {
+      // Xóa sản phẩm đã thanh toán trên server
+      await Promise.all(
+        selectedProducts.map((id) => httpRequest.delete(`cart/${id}`))
+      );
+
+      // Cập nhật state
+      const remaining = validCart.filter(
+        (item) => !selectedProducts.includes(item.product._id)
+      );
+      setCartState(remaining);
+      setSelectedProducts([]);
+      setShowPaymentModal(false);
+
+      // Hiển thị toast thành công
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+
+    } catch (err) {
+      console.error("Lỗi khi thanh toán:", err);
+      setError("Thanh toán thất bại, vui lòng thử lại!");
+    }
   };
 
   return (
     <>
-      {/* Nếu Cart rỗng */}
-      {validCart.length === 0 && (
-        <div className="cartcontainer">
-          <div className="emptycart">
-            <h2 className="empty">Giỏ hàng trống</h2>
-            <Link to="/product" className="emptycartbtn">
-              Mua ngay
-            </Link>
-          </div>
+      <div className="cart-wrapper">
+        {validCart.map((curElm) => {
+          const selected = selectedProducts.includes(curElm.product._id);
+          return (
+            <div className="cart-item" key={curElm.product._id}>
+              <input
+                type="checkbox"
+                className="select-checkbox"
+                checked={selected}
+                onChange={() => toggleSelect(curElm.product._id)}
+              />
+              <div className="cart-left">
+                <img
+                  src={getImageUrl(curElm.product.Img)}
+                  alt={curElm.product.Title}
+                  className="cart-img"
+                />
+              </div>
+              <div className="cart-middle">
+                <h4 className="cart-category">{curElm.product.Cat}</h4>
+                <h3 className="cart-title">{curElm.product.Title}</h3>
+                <p className="cart-price">{curElm.product.Price.toLocaleString()} VND</p>
+                <div className="cart-qty">
+                  <button onClick={() => incqty(curElm.product._id)} className="qty-btn">+</button>
+                  <input type="text" readOnly value={curElm.qty} className="qty-input" />
+                  <button onClick={() => decqty(curElm.product._id)} className="qty-btn">-</button>
+                </div>
+                <h4 className="cart-subtotal">
+                  Tạm tính: {(curElm.qty * curElm.product.Price).toLocaleString()} VND
+                </h4>
+              </div>
+              <button className="remove-btn" onClick={() => removeProduct(curElm.product._id)}>
+                <AiOutlineClose />
+              </button>
+            </div>
+          );
+        })}
+        <p style={{ color: "red", marginLeft: "20px" }}>{error}</p>
+      </div>
+
+      {selectedProducts.length > 0 && (
+        <div className="cart-footer">
+          <h2>Tổng tiền: {totalSelected.toLocaleString()} VND</h2>
+          <button className="checkout-btn" onClick={handlePayment}>
+            Thanh toán
+          </button>
         </div>
       )}
 
-      {/* Danh sách sản phẩm */}
-      <div className="contant">
-        {validCart.map((curElm) => (
-          <div className="cart_item" key={curElm.product._id}>
-            <div className="img_box">
-              <img
-                src={getImageUrl(`${curElm.product.Img}`)}
-                alt={curElm.product.Title}
-              />
-            </div>
-
-            <div className="detail">
-              <h4>{curElm.product.Cat}</h4>
-              <h3>{curElm.product.Title}</h3>
-              <p>Price: {curElm.product.Price.toLocaleString()} VND</p>
-
-              <div className="qty">
-                <button
-                  className="incqty"
-                  onClick={() => incqty(curElm.product._id)}
-                >
-                  +
-                </button>
-                <input type="text" readOnly value={curElm.qty} />
-                <button
-                  className="decqty"
-                  onClick={() => decqty(curElm.product._id)}
-                >
-                  -
-                </button>
-              </div>
-
-              <h4 className="subtotal">
-                Tạm tính: {(curElm.qty * curElm.product.Price).toLocaleString()}{" "}
-                VND
-              </h4>
-            </div>
-
-            <div className="extra-content">
-              <h2 className="totalprice">
-                Tổng: {Totalprice.toLocaleString()} VND
-              </h2>
-              <button className="checkout" onClick={handlePayment}>
-                Thanh toán
-              </button>
-
-              <div className="close">
-                <button onClick={() => removeProduct(curElm.product._id)}>
-                  <AiOutlineClose />
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Form thanh toán */}
       {showPaymentModal && (
         <div className="overlay">
           <div className="payment-box">
             <h2>Đặt Hàng</h2>
-
             <div className="pay-on-delivery-info">
-              <label>Tên:</label>
-              <input
-                type="text"
-                name="name"
-                value={userInfo.name}
-                onChange={handleInputChange}
-              />
-
-              <label>Địa chỉ:</label>
-              <input
-                type="text"
-                name="address"
-                value={userInfo.address}
-                onChange={handleInputChange}
-              />
-
-              <label>Số điện thoại:</label>
-              <input
-                type="tel"
-                name="phone"
-                value={userInfo.phone}
-                onChange={handleInputChange}
-              />
-
-              <label>Email:</label>
-              <input
-                type="email"
-                name="email"
-                value={userInfo.email}
-                onChange={handleInputChange}
-              />
-
-              <p style={{ color: "red" }}>{error}</p>
-
+              <label style={{color: "#000", fontWeight: "bold"}}>Tên:</label>
+              <input type="text" name="name" value={userInfo.name} onChange={handleInputChange} />
+              <label style={{color: "#000", fontWeight: "bold"}}>Địa chỉ:</label>
+              <input type="text" name="address" value={userInfo.address} onChange={handleInputChange} />
+              <label style={{color: "#000", fontWeight: "bold"}}>Số điện thoại:</label>
+              <input type="tel" name="phone" value={userInfo.phone} onChange={handleInputChange} />
+              <label style={{color: "#000", fontWeight: "bold"}}>Email:</label>
+              <input type="email" name="email" value={userInfo.email} onChange={handleInputChange} />
+              <p className="error-text">{error}</p>
               <button id="payOnDelivery" onClick={handlePayOnDelivery}>
-                Đặt hàng ngay
+                Thanh toán {totalSelected.toLocaleString()} VND
               </button>
-
-              <button id="goBack" onClick={() => setShowPaymentModal(false)}>
-                Quay lại
-              </button>
+              <button id="goBack" onClick={() => setShowPaymentModal(false)}>Quay lại</button>
             </div>
           </div>
         </div>
+      )}
+
+      {/* Toast hiển thị trên cùng */}
+      {showToast && (
+        <div className="toast">Thanh toán thành công!</div>
       )}
     </>
   );

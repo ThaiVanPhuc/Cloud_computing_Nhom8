@@ -185,3 +185,39 @@
 .comments-section form button:hover {
   background: #003fad;
 }
+/* === TOAST MESSAGE (giữa ngang, phía trên) === */
+.toast-message {
+  position: fixed;
+  top: 10%;            /* 👈 Ở phía trên màn hình */
+  left: 50%;
+  transform: translate(-50%, 0);  /* Giữ giữa ngang */
+
+  background: rgba(247, 144, 144, 0.85);
+  color: #fff;
+  padding: 14px 26px;
+  border-radius: 10px;
+
+  font-size: 18px;
+  z-index: 9999;
+
+  animation: fadeInOut 2s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20%);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -20%);
+  }
+}

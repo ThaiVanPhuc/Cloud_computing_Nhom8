@@ -18,10 +18,12 @@ const Product = () => {
   const [comments, setComments] = useState([]);
   const [close, setClose] = useState(false);
 
+  const [showToast, setShowToast] = useState(false); // 👉 thêm state toast
+
   const navigate = useNavigate();
 
   // =====================
-  // 👉 ADD TO CART (Sửa đúng backend yêu cầu)
+  // 👉 ADD TO CART (Có Toast)
   // =====================
   const handleAddToCart = async (item) => {
     try {
@@ -30,7 +32,9 @@ const Product = () => {
         qty: 1,
       });
 
-      alert("Đã thêm vào giỏ hàng!");
+      // Hiện toast
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2000);
     } catch (error) {
       console.error("Lỗi thêm vào giỏ:", error);
       alert("Thêm vào giỏ thất bại!");
@@ -62,6 +66,13 @@ const Product = () => {
 
   return (
     <>
+      {/* 👉 TOAST THÔNG BÁO */}
+      {showToast && (
+        <div className="toast-message">
+          Đã thêm vào giỏ hàng!
+        </div>
+      )}
+
       {/* DANH SÁCH SẢN PHẨM */}
       <div className="products">
         <h2>Products</h2>
@@ -74,9 +85,7 @@ const Product = () => {
               <ul>
                 <li onClick={allProducts}>All Products</li>
                 <li onClick={() => filterProduct("Tablet")}>Tablet</li>
-                <li onClick={() => filterProduct("Smart Watch")}>
-                  Smart Watch
-                </li>
+                <li onClick={() => filterProduct("Smart Watch")}>Smart Watch</li>
                 <li onClick={() => filterProduct("Laptop")}>Laptop</li>
                 <li onClick={() => filterProduct("Headphone")}>Headphone</li>
                 <li onClick={() => filterProduct("Camera")}>Camera</li>

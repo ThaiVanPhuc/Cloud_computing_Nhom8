@@ -15,11 +15,33 @@ import logo from "../../assets/box-Banner/logo.gif";
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [user, setUser] = useState(null);
+  const [cartCount, setCartCount] = useState(0); // state giỏ hàng
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) setUser(JSON.parse(storedUser));
+
+    const fetchCartCount = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Lấy token từ localStorage
+
+        const res = await fetch("http://localhost:5000/api/cart", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await res.json();
+
+        // Tính tổng số lượng sản phẩm trong cart
+        setCartCount(data.items?.reduce((total, item) => total + item.qty, 0) || 0);
+      } catch (e) {
+        console.error("Lỗi lấy giỏ hàng:", e);
+      }
+    };
+
+    fetchCartCount();
   }, []);
 
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
@@ -27,6 +49,7 @@ const Header = () => {
     e.preventDefault();
     if (searchQuery.trim()) navigate(`/search?keyword=${searchQuery}`);
   };
+
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
@@ -36,7 +59,6 @@ const Header = () => {
 
   return (
     <>
-      {/* Header Navbar */}
       <Navbar
         expand="lg"
         style={{
@@ -75,6 +97,7 @@ const Header = () => {
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="navbar-nav" />
+
           <Navbar.Collapse id="navbar-nav" className="justify-content-between">
             <Nav className="mx-auto fw-semibold">
               <Nav.Item>
@@ -105,6 +128,7 @@ const Header = () => {
               </Nav.Item>
             </Nav>
 
+            {/* SEARCH */}
             <Form
               onSubmit={handleSearchSubmit}
               className="me-3 position-relative"
@@ -144,13 +168,42 @@ const Header = () => {
               />
             </Form>
 
+            {/* ICONS */}
             <div className="d-flex align-items-center gap-3">
               <Link to="/favorites" className="icon-link">
                 <FaHeart size={20} color="#ff4d6d" />
               </Link>
-              <Link to="/cart" className="icon-link">
-                <FaShoppingBag size={20} color="#28a745" />
-              </Link>
+
+              {/* 🛒 GIỎ HÀNG + BADGE */}
+             {/* 🛒 GIỎ HÀNG + BADGE */}
+<div style={{ position: "relative", display: "inline-block" }}>
+  <Link to="/cart" className="icon-link">
+    <FaShoppingBag size={22} color="#28a745" />
+  </Link>
+
+  {cartCount > 0 && (
+    <span
+      style={{
+        position: "absolute",
+        top: "-6px",
+        right: "-10px",
+        background: "#ff4d6d",
+        color: "#fff",
+        fontSize: "10px",
+        fontWeight: "bold",
+        padding: "3px 6px",
+        borderRadius: "50%",
+        minWidth: "20px",
+        textAlign: "center",
+        boxShadow: "0 0 2px rgba(0,0,0,0.3)",
+        zIndex: 99,
+      }}
+    >
+      {cartCount}
+    </span>
+  )}
+</div>
+
 
               {user ? (
                 <>
@@ -185,14 +238,8 @@ const Header = () => {
             </div>
           </Navbar.Collapse>
         </Container>
-
-        <style>{`
-          .hover-link:hover { color: #ff4d6d !important; text-decoration: underline; }
-          .icon-link:hover svg { transform: scale(1.2); transition: transform 0.2s ease; }
-        `}</style>
       </Navbar>
 
-      {/* Hero Carousel dưới Header */}
     </>
   );
 };
