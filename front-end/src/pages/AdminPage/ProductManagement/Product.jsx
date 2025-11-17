@@ -5,116 +5,18 @@ import * as productServices from "../../../services/productServices";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const AdminProductPage = () => {
-  const [products, setProducts] = useState([]);
-  const [formData, setFormData] = useState({
-    id: "",
-    Title: "",
-    Cat: "",
-    Price: "",
-    Description: "",
-    Img: null,
-    ImgUrl: "", // để lưu url ảnh cũ
-  });
-  const [error, setError] = useState("");
-  const [showModal, setShowModal] = useState(false);
-
-  const fetchProducts = async () => {
-    try {
-      const data = await productServices.getAllProducts();
-      setProducts(data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      const token = localStorage.getItem("token");
-      await productServices.deleteProduct(id, token);
-      fetchProducts();
-    } catch (error) {
-      console.error("Error deleting product:", error);
-    }
-  };
-
-  const handleEdit = (product) => {
-    setFormData({
-      id: product._id,
-      Title: product.Title,
-      Cat: product.Cat,
-      Price: product.Price,
-      Description: product.Description,
-      Img: null, // chưa chọn file mới
-      ImgUrl: product.Img ? getImageUrl(product.Img) : "", // lưu url ảnh cũ
-    });
-    setShowModal(true);
-  };
-
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "Img") {
-      setFormData((prev) => ({ ...prev, Img: files[0] }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-
-    try {
-      const token = localStorage.getItem("token");
-      const form = new FormData();
-      form.append("Title", formData.Title);
-      form.append("Cat", formData.Cat);
-      form.append("Price", formData.Price);
-      form.append("Description", formData.Description);
-
-      // Nếu có file mới thì append file, nếu không thì gửi imgUrl cũ
-      if (formData.Img) {
-        form.append("Img", formData.Img);
-      } else if (formData.ImgUrl) {
-        form.append("ImgUrl", formData.ImgUrl);
-      }
-
-      if (formData.id) {
-        await productServices.updateProduct(formData.id, form, token);
-      } else {
-        await productServices.createProduct(form, token);
-      }
-
-      setFormData({
+    const [products, setProducts] = useState([]);
+    const [formData, setFormData] = useState({
         id: "",
         Title: "",
         Cat: "",
         Price: "",
         Description: "",
         Img: null,
-        ImgUrl: "",
-      });
-      setShowModal(false);
-      fetchProducts();
-    } catch (error) {
-      console.error("Error saving product:", error);
-      setError("Lỗi khi lưu sản phẩm. Vui lòng kiểm tra lại.");
-    }
-  };
-
-  const handleAddProductClick = () => {
-    setFormData({
-      id: "",
-      Title: "",
-      Cat: "",
-      Price: "",
-      Description: "",
-      Img: null,
-      ImgUrl: "",
     });
-    setShowModal(true);
-  };
+    const [error, setError] = useState("");
+    const [showModal, setShowModal] = useState(false);
 
-<<<<<<< HEAD
     const fetchProducts = async () => {
         try {
             const data = await productServices.getAllProducts();
@@ -124,93 +26,42 @@ const AdminProductPage = () => {
             console.error("Error fetching products:", error);
         }
     };
-=======
-  const closeModal = () => {
-    setShowModal(false);
-    setFormData({
-      id: "",
-      Title: "",
-      Cat: "",
-      Price: "",
-      Description: "",
-      Img: null,
-      ImgUrl: "",
-    });
-    setError("");
-  };
->>>>>>> b4608e7106536be1cf0e4112a2ec967fd8035dc6
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+    const handleDelete = async (id) => {
+        try {
+            const token = localStorage.getItem("token");
+            await productServices.deleteProduct(id, token);
+            fetchProducts();
+        } catch (error) {
+            console.error("Error deleting product:", error);
+        }
+    };
 
-  return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Product Management</h1>
-      <button className={styles.addBtn} onClick={handleAddProductClick}>
-        Thêm Sản phẩm
-      </button>
+    const handleEdit = (product) => {
+        setFormData({
+            id: product._id,
+            Title: product.Title,
+            Cat: product.Cat,
+            Price: product.Price,
+            Description: product.Description,
+            Img: null,
+        });
+        setShowModal(true);
+    };
 
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Cat</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Image</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(products) &&
-            products.map((product, index) => (
-              <tr key={product._id}>
-                <td>{index + 1}</td>
-                <td>{product.Title}</td>
-                <td>{product.Cat}</td>
-                <td>{product.Price}</td>
-                <td>{product.Description}</td>
-                <td>
-                  {product.Img && (
-                    <img
-                      src={getImageUrl(product.Img)}
-                      alt={product.Title}
-                      style={{
-                        width: "60px",
-                        height: "60px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  )}
-                </td>
-                <td>
-                  <button
-                    className={styles.editBtn}
-                    onClick={() => handleEdit(product)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className={styles.deleteBtn}
-                    onClick={() => handleDelete(product._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+        if (name === "Img") {
+            setFormData((prev) => ({ ...prev, Img: files[0] }));
+        } else {
+            setFormData((prev) => ({ ...prev, [name]: value }));
+        }
+    };
 
-      {showModal && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modalContent}>
-            <h2>{formData.id ? "Cập nhật sản phẩm" : "Thêm sản phẩm"}</h2>
-            {error && <p className={styles.error}>{error}</p>}
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
 
-<<<<<<< HEAD
         try {
             const token = localStorage.getItem("token");
             if (formData.id) {
@@ -380,75 +231,8 @@ const AdminProductPage = () => {
                     </div>
                 </div>
             )}
-=======
-            <form onSubmit={handleSubmit} className={styles.form}>
-              <input
-                type="text"
-                name="Title"
-                placeholder="Title"
-                value={formData.Title}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="text"
-                name="Cat"
-                placeholder="Category"
-                value={formData.Cat}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="text"
-                name="Price"
-                placeholder="Price"
-                value={formData.Price}
-                onChange={handleChange}
-                required
-              />
-              <textarea
-                name="Description"
-                placeholder="Description"
-                value={formData.Description}
-                onChange={handleChange}
-              />
-              <input
-                type="file"
-                name="Img"
-                accept="image/*"
-                onChange={handleChange}
-              />
-              {formData.ImgUrl && !formData.Img && (
-                <img
-                  src={formData.ImgUrl}
-                  alt="Current"
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    objectFit: "cover",
-                    marginTop: "10px",
-                  }}
-                />
-              )}
-              <div className={styles.modalButtons}>
-                <button type="submit" className={styles.saveBtn}>
-                  {formData.id ? "Cập nhật" : "Thêm"}
-                </button>
-                <button
-                  type="button"
-                  className={styles.cancelBtn}
-                  onClick={closeModal}
-                >
-                  Hủy
-                </button>
-              </div>
-            </form>
-          </div>
->>>>>>> b4608e7106536be1cf0e4112a2ec967fd8035dc6
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default AdminProductPage;
