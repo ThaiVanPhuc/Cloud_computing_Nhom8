@@ -39,7 +39,6 @@ class ProductController {
         Luotban,
       });
       await product.save();
-
       res.status(201).json(product);
     } catch (error) {
       console.error("Add Product Error:", error);
@@ -49,13 +48,25 @@ class ProductController {
 
   async updateProduct(req, res) {
     try {
+      const updateData = { ...req.body };
+
+      if (req.file) {
+        updateData.Img = `/uploads/${req.file.filename}`;
+      } else {
+        if (updateData.Img && typeof updateData.Img === "object")
+          delete updateData.Img;
+      }
+
+      delete updateData._id;
+
       const updatedProduct = await Product.findByIdAndUpdate(
         req.params.id,
-        req.body,
+        updateData,
         { new: true }
       );
       if (!updatedProduct)
         return res.status(404).json({ message: "Product not found" });
+
       res.json(updatedProduct);
     } catch (error) {
       console.error("Update Product Error:", error);
@@ -75,15 +86,11 @@ class ProductController {
     }
   }
 
-  // tim kiem san pham
-
   async searchProduct(req, res) {
     try {
       const keyword = req.query.search;
-
-      if (!keyword || keyword.trim() === "") {
+      if (!keyword || keyword.trim() === "")
         return res.status(400).json({ message: "Missing search keyword" });
-      }
 
       const products = await Product.find({
         $or: [
