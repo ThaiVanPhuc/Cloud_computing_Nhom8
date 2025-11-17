@@ -3,6 +3,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import httpRequest from "../../../utils/httpRequest";
 import "./cart.css";
+import { getImageUrl } from "../../../utils/image";
 
 const Cart = ({ setCart }) => {
   const [cart, setCartState] = useState([]);
@@ -129,7 +130,10 @@ const Cart = ({ setCart }) => {
         {validCart.map((curElm) => (
           <div className="cart_item" key={curElm.product._id}>
             <div className="img_box">
-              <img src={curElm.product.Img} alt={curElm.product.Title} />
+              <img
+                src={getImageUrl(`/uploads${curElm.product.Img}`)}
+                alt={curElm.product.Title}
+              />
             </div>
 
             <div className="detail">
