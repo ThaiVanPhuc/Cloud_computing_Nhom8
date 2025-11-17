@@ -131,7 +131,7 @@ const Cart = ({ setCart }) => {
           <div className="cart_item" key={curElm.product._id}>
             <div className="img_box">
               <img
-                src={getImageUrl(`/uploads${curElm.product.Img}`)}
+                src={getImageUrl(`${curElm.product.Img}`)}
                 alt={curElm.product.Title}
               />
             </div>
