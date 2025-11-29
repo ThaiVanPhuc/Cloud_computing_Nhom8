@@ -164,7 +164,8 @@ const AdminNewsPage = () => {
                                     <FaEdit className={styles.editIcon} />
                                 </button>
 
-                                <button className={styles.iconBtn} onClick={() => handleDelete(item)}>
+                                {/* FIX ĐÚNG 100% TẠI ĐÂY */}
+                                <button className={styles.iconBtn} onClick={() => confirmDelete(item)}>
                                     <FaTrash className={styles.deleteIcon} />
                                 </button>
 

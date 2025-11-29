@@ -66,19 +66,22 @@ class NewController {
     }
   }
 
-  // [Delete]  /api/news/:id
-  async deleteNew(req, res) {
-    try {
-      const newStory = await New.findByIdAndDelete(req.params.id);
-      if (!newStory) {
-        return res.status(404).json("New not found");
-      }
-      res.status(200).json("New deleted successfully", newStory);
-    } catch (error) {
-      console.error("Server error while deleting new", error);
-      res.json("Server error while deleting new");
+// [Delete]  /api/news/:id
+async deleteNew(req, res) {
+  try {
+    const newStory = await New.findByIdAndDelete(req.params.id);
+    if (!newStory) {
+      return res.status(404).json({ message: "News not found" });
     }
+
+    // Trả về object JSON đúng chuẩn
+    return res.status(200).json({ message: "News deleted successfully", deletedNews: newStory });
+  } catch (error) {
+    console.error("Server error while deleting news", error);
+    return res.status(500).json({ message: "Server error while deleting news" });
   }
+}
+
 
   // [PATCH]  /api/news/:id
   async updateNew(req, res) {

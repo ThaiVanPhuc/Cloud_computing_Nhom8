@@ -22,16 +22,15 @@ export const getProductById = async (id) => {
   }
 };
 
-export const createProduct = async (productData) => {
+export const createProduct = async (formData, token) => {
   try {
-    const formData = new FormData();
-    for (let key in productData) {
-      formData.append(key, productData[key]);
-    }
-    const response = await httpRequest.post("products", formData);
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await httpRequest.post("products", formData, headers);
     return response;
   } catch (error) {
-    console.error("Error createProduct", error);
+    console.error("Error createProduct", error.response?.data || error.message);
     return null;
   }
 };
