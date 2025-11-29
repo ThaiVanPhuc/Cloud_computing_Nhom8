@@ -25,25 +25,34 @@ class ProductController {
     }
   }
 
-  async addProduct(req, res) {
-    try {
-      const { Title, Cat, Price, Description } = req.body;
-      const Img = req.file ? `/uploads/${req.file.filename}` : "";
+ async addProduct(req, res) {
+  try {
+    const { Title, Cat, Price, Description } = req.body;
 
-      const product = new Product({
-        Title,
-        Cat,
-        Price,
-        Description,
-        Img,
-      });
-      await product.save();
-      res.status(201).json(product);
-    } catch (error) {
-      console.error("Add Product Error:", error);
-      res.status(500).json({ message: "Failed to add product" });
+    // Ép kiểu Price về Number và validate
+    const priceNumber = Number(Price);
+    if (isNaN(priceNumber)) {
+      return res.status(400).json({ message: "Price phải là số hợp lệ" });
     }
+
+    const Img = req.file ? `/uploads/${req.file.filename}` : "";
+
+    const newProduct = new Product({
+      Title,
+      Cat,
+      Price: priceNumber,
+      Description,
+      Img,
+    });
+
+    await newProduct.save();
+    res.status(201).json({ message: "Product created successfully", newProduct });
+  } catch (error) {
+    console.error("Add Product Error:", error);
+    res.status(500).json({ message: "Server error while adding product" });
   }
+}
+
 
   async updateProduct(req, res) {
     try {

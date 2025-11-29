@@ -16,6 +16,8 @@ const AdminProductPage = () => {
   });
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
 
   const fetchProducts = async () => {
     try {
@@ -26,14 +28,27 @@ const AdminProductPage = () => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const confirmDelete = (product) => {
+    setProductToDelete(product);
+    setShowDeleteModal(true);
+  };
+
+  const handleDelete = async () => {
+    if (!productToDelete) return;
     try {
       const token = localStorage.getItem("token");
-      await productServices.deleteProduct(id, token);
+      await productServices.deleteProduct(productToDelete._id, token);
+      setShowDeleteModal(false);
+      setProductToDelete(null);
       fetchProducts();
     } catch (err) {
       console.error("Error deleting product:", err);
     }
+  };
+
+  const cancelDelete = () => {
+    setProductToDelete(null);
+    setShowDeleteModal(false);
   };
 
   const handleEdit = (product) => {
@@ -173,7 +188,7 @@ const AdminProductPage = () => {
                   </button>
                   <button
                     className={styles.iconBtn}
-                    onClick={() => handleDelete(product._id)}
+                    onClick={() => confirmDelete(product)}
                   >
                     <FaTrash className={styles.deleteIcon} />
                   </button>
@@ -183,6 +198,7 @@ const AdminProductPage = () => {
         </tbody>
       </table>
 
+      {/* Modal Thêm / Cập nhật sản phẩm */}
       {showModal && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalContent}>
@@ -220,25 +236,36 @@ const AdminProductPage = () => {
                 value={formData.Description}
                 onChange={handleChange}
               />
-              <input
-                type="file"
-                name="Img"
-                accept="image/*"
-                onChange={handleChange}
-              />
+              <input type="file" name="Img" accept="image/*" onChange={handleChange} />
               <div className={styles.modalButtons}>
                 <button type="submit" className={styles.saveBtn}>
                   {formData.id ? "Cập nhật" : "Thêm"}
                 </button>
-                <button
-                  type="button"
-                  className={styles.cancelBtn}
-                  onClick={closeModal}
-                >
+                <button type="button" className={styles.cancelBtn} onClick={closeModal}>
                   Hủy
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Xóa sản phẩm */}
+      {showDeleteModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h3>Bạn có chắc chắn muốn xóa sản phẩm này không?</h3>
+            <p>
+              <strong>{productToDelete?.Title}</strong>
+            </p>
+            <div className={styles.modalButtons}>
+              <button className={styles.deleteBtn} onClick={handleDelete}>
+                Xóa
+              </button>
+              <button className={styles.cancelBtn} onClick={cancelDelete}>
+                Hủy
+              </button>
+            </div>
           </div>
         </div>
       )}
