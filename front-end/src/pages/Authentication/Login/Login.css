@@ -1,86 +1,130 @@
+/* ================== LOGIN CONTAINER ================== */
 .login-container {
-    display: flex;
-    width: 800px;
-    height: 500px;
-    margin: 50px auto;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: rgb(247, 183, 154);
+  display: flex;
+  width: 800px;
+  max-width: 95%;
+  height: 500px;
+  margin: 50px auto;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  background-color: #a25656;
+  transition: all 0.3s ease;
+}
+
+/* ================== LEFT IMAGE ================== */
+.login-image {
+  flex: 1;
+  background-image: url('https://img.pikbest.com/wp/202409/online-shopping-store-at-a-3d-on-your-smartphone-pink-background-with-floating-bag-and-discount-promotion-banner-render-illustration_9747426.jpg!bw700');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
+}
+
+.login-image:hover {
+  transform: scale(1.05);
+}
+
+/* ================== RIGHT FORM ================== */
+.login-form {
+  flex: 1;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(180deg, #f1aac2, #fadee9);
+}
+
+/* TITLE */
+.login-form h2 {
+  margin-bottom: 25px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1d1418;
+  text-align: center;
+}
+
+/* ================== INPUT ================== */
+/* Bo tròn, nền trong suốt, hiện đại */
+.login-form input {
+  width: 100%;
+  margin-top: 6px;
+  margin-bottom: 15px;
+  padding: 14px 20px;
+  border: 2px solid rgba(214, 51, 132, 0.5);  /* viền hồng nhạt */
+  border-radius: px;                         /* bo góc tròn */
+  background: rgba(255, 255, 255, 0.2);       /* nền trong suốt */
+  backdrop-filter: blur(5px);                  /* mờ nền đẹp */
+  outline: none;
+  font-size: 15px;
+  color: #333;
+  transition: all 0.25s ease;
+}
+
+.login-form input:focus {
+  border-color: #d70b1c;                       /* viền hồng nổi bật khi focus */
+  box-shadow: 0 0 15px rgba(226, 7, 7, 0.3);
+}
+
+.login-form input::placeholder {
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* ================== BUTTON ================== */
+button {
+  margin-top: 10px;
+  padding: 14px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  background: #333;
+  border: none;
+  border-radius: 30px;      /* giống input */
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+button:hover {
+  background: #000;
+  transform: translateY(-2px);
+}
+
+/* ================== SIGNUP LINK ================== */
+p {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.text-gray {
+  color: #777;
+}
+
+.text-blue {
+  color: #f60707;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.text-blue:hover {
+  text-decoration: underline;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    height: auto;
+    margin: 30px auto;
   }
-  
+
   .login-image {
-    flex: 1;
-    background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20231225/pngtree-dark-abstract-technological-texture-image_13897245.png');
-    background-size: cover;
-    background-position: center;
+    height: 200px;
   }
-  
+
   .login-form {
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 30px 20px;
   }
-  
-  h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin-top: 10px;
-    color: #413e3e;
-  }
-  
-  input {
-    margin-bottom: 15px;
-    padding: 8px;
-    border: 1px solid #b3b0b0;
-    border-radius: 4px;
-  }
-  
-  button {
-    padding: 10px;
-    background-color: #7c7877;
-    color: #f5f3f3;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #141414;
-  }
-  
-  p {
-    margin-top: 20px;
-    font-size: 14px;
-    
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .login-container {
-      flex-direction: column;
-      width: 90%;
-      height: auto;
-    }
-  
-    .login-image {
-      display: none;
-    }
-  
-    .login-form {
-      padding: 20px;
-    }
-  }
-  
+}

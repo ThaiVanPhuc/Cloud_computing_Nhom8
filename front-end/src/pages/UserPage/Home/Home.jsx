@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import httpRequest from "../../../utils/httpRequest";
 import { BsArrowRight } from "react-icons/bs";
-import banner from "../../../assets/box-Banner/background2.avif";
 import "./Home.css";
 import Chatbox from "../../../components/Chatbox/chatbox";
 import { getImageUrl } from "../../../utils/image";

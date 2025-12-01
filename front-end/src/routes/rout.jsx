@@ -8,7 +8,7 @@ import Signup from "../pages/Authentication/SignUp/SignUp";
 import AdminUserPage from '../pages/AdminPage/UserManagement/Users';
 import AdminProductPage from '../pages/AdminPage/ProductManagement/Product';
 import AdminLayout from "../layouts/Admin/AdminLayout";
-import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 import SearchPage from "../pages/UserPage/Product/searchProduct";
 import AdminNewPage from '../pages/AdminPage/NewPage';
 import NewPage from '../pages/UserPage/News/new';
@@ -30,6 +30,7 @@ const Rout = ({
   return (
     <>
       <Routes>
+
         <Route
           path="/"
           element={
@@ -42,6 +43,7 @@ const Rout = ({
             />
           }
         />
+
         <Route
           path="/product"
           element={
@@ -53,24 +55,21 @@ const Rout = ({
               close={close}
               setClose={setClose}
               addtocart={addtocart}
-
             />
-
           }
         />
-        <Route
-          path="/product/:id"
-          element={
-            <ProductDetail
-              addtocart={addtocart} />} />
-        <Route path="/search" element={<SearchPage addtocart={addtocart}
-        />} />
 
         <Route
           path="/product/:id"
-          element={
-            <ProductDetail
-              addtocart={addtocart} />} />
+          element={<ProductDetail addtocart={addtocart} />}
+        />
+
+        <Route path="/search" element={<SearchPage addtocart={addtocart} />} />
+
+        <Route
+          path="/product/:id"
+          element={<ProductDetail addtocart={addtocart} />}
+        />
 
         <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
         <Route path="/contact" element={<Contact />} />
@@ -78,49 +77,53 @@ const Rout = ({
         <Route path="/news/:id" element={<NewsDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+
+
+        {/* ===================== ADMIN ROUTES ===================== */}
+
         <Route
           path="/admin/users"
           element={
-            <PrivateRoute>
+            <AdminRoute>
               <AdminLayout>
                 <AdminUserPage />
               </AdminLayout>
-            </PrivateRoute>
+            </AdminRoute>
           }
         />
+
         <Route
           path="/admin/products"
           element={
-            <PrivateRoute>
+            <AdminRoute>
               <AdminLayout>
                 <AdminProductPage />
               </AdminLayout>
-            </PrivateRoute>
+            </AdminRoute>
           }
         />
+
         <Route
           path="/admin"
           element={
-            <PrivateRoute>
-              <AdminLayout>
-                {/* <AdminProductPage /> */}
-              </AdminLayout>
-            </PrivateRoute>
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
           }
         />
 
         <Route
           path="/admin/news"
           element={
-            <PrivateRoute>
+            <AdminRoute>
               <AdminLayout>
                 <AdminNewPage />
               </AdminLayout>
-            </PrivateRoute>
+            </AdminRoute>
           }
         />
 
-      </Routes >
+      </Routes>
     </>
   );
 };

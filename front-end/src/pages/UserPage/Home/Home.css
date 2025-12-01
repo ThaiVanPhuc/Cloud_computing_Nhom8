@@ -4,76 +4,84 @@
     font-family: sans-serif;
     box-sizing: border-box;
 }
+
 .slider-container {
-      overflow: hidden;
-      width: 100%;
-      max-width: 1200px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.slider-track {
+    display: flex;
+    width: calc(300px * 3);
+    animation: scroll 25s linear infinite;
+}
+
+.slide-item {
+    flex: 0 0 calc(100% / 3);
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.slide-item img:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
     }
 
-    .slider-track {
-      display: flex;
-      width: calc(300px * 3);
-      animation: scroll 25s linear infinite;
+    100% {
+        transform: translateX(-50%);
     }
+}
 
+@media (max-width: 668px) {
     .slide-item {
-      flex: 0 0 calc(100% / 3);
-      padding: 0 15px;
-      box-sizing: border-box;
-    }
-
-    .slide-item img:hover {
-      transform: scale(1.05);
-      cursor: pointer;
-    }
-
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    @media (max-width: 668px) {
-      .slide-item {
         flex: 0 0 calc(100% / 1.2);
-      }
     }
-    .seller-card {
-      cursor: pointer;
-      transition: transform 0.4s, box-shadow 0.4s;
-    }
+}
 
-    .seller-card:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    }
+.seller-card {
+    cursor: pointer;
+    transition: transform 0.4s, box-shadow 0.4s;
+}
 
-    .seller-overlay {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      padding: 20px;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
-      transition: background 0.3s;
-    }
+.seller-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
 
-    .seller-card:hover .seller-overlay {
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
-    }
+.seller-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+    transition: background 0.3s;
+}
 
+.seller-card:hover .seller-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+.seller-overlay h5 {
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.seller-overlay .badge {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
     .seller-overlay h5 {
-      font-size: 1.3rem;
-      margin: 0;
-    }
-
-    .seller-overlay .badge {
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 768px) {
-      .seller-overlay h5 {
         font-size: 1.1rem;
-      }
     }
+}
+
 /* Hiệu ứng fade + zoom slide */
 .fade-slide {
     animation: fadeZoom 6s ease-in-out infinite;

@@ -14,21 +14,22 @@ const SearchPage = ({ addtocart }) => {
   const query = new URLSearchParams(location.search).get("keyword");
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await httpRequest.get(`products/search?search=${query}`);
-        setProducts(res.data);
-      } catch (error) {
-        console.error("Lỗi khi tìm kiếm sản phẩm:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (!query) return;
 
-    if (query) {
-      fetchProducts();
+  const fetchProducts = async () => {
+    try {
+      const res = await httpRequest.get(`products/search?search=${query}`);
+      setProducts(res.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
-  }, [query]);
+  };
+
+  fetchProducts();
+}, [query]);
+
 
   return (
     <Container className="mt-4 text-center ">

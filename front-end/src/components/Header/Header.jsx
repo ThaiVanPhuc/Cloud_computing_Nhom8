@@ -19,34 +19,62 @@ const Header = () => {
   const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Lấy user từ localStorage
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) setUser(JSON.parse(storedUser));
+  // Lấy user và giỏ hàng, tự động cập nhật khi cart thay đổi
+  const fetchCartCount = async () => {
+    try {
+      const res = await httpRequest.get("cart");
+      const data = res.data;
 
-        const res = await httpRequest.get("cart");
+      const total =
+        data.items?.reduce((sum, item) => {
+          if (!item.product) return sum;
+          return sum + item.qty;
+        }, 0) || 0;
 
-        const data = res.data;
+      setCartCount(total);
+    } catch (e) {
+      console.error("Lỗi lấy giỏ hàng:", e);
+    }
+  };
+useEffect(() => {
+  const storedUser = localStorage.getItem("user");
+  if (storedUser) setUser(JSON.parse(storedUser));
 
-        // Tính tổng số lượng, bỏ qua item rỗng (product = null)
-        const total =
-          data.items?.reduce((sum, item) => {
-            if (!item.product) return sum;
-            return sum + item.qty;
-          }, 0) || 0;
+  // Lấy cart lần đầu
+  const fetchCartCount = async () => {
+    try {
+      const res = await httpRequest.get("cart");
+      const total = res.data.items?.reduce(
+        (sum, item) => (item.product ? sum + item.qty : sum),
+        0
+      ) || 0;
+      setCartCount(total);
+    } catch (e) {
+      console.error(e);
+      setCartCount(0);
+    }
+  };
+  fetchCartCount();
 
-        setCartCount(total);
-      } catch (e) {
-        console.error("Lỗi lấy giỏ hàng:", e);
-      }
-    };
+  // Lắng nghe event cập nhật cart
+  const handleCartUpdate = (e) => {
+    if (e.detail !== undefined) {
+      setCartCount(e.detail); // nếu có gửi tổng số lượng
+    } else {
+      // Nếu không gửi tổng số lượng, fetch lại cart
+      fetchCartCount();
+    }
+  };
 
-    fetchData();
-  }, []);
+  window.addEventListener("cartUpdated", handleCartUpdate);
+
+  return () => window.removeEventListener("cartUpdated", handleCartUpdate);
+}, []);
+
+
 
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) navigate(`/search?keyword=${searchQuery}`);
@@ -176,8 +204,6 @@ const Header = () => {
                 <FaHeart size={20} color="#ff4d6d" />
               </Link>
 
-              {/* 🛒 GIỎ HÀNG + BADGE */}
-              {/* 🛒 GIỎ HÀNG + BADGE */}
               <div style={{ position: "relative", display: "inline-block" }}>
                 <Link to="/cart" className="icon-link">
                   <FaShoppingBag size={22} color="#28a745" />

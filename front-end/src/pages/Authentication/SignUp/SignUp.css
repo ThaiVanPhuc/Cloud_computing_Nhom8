@@ -1,84 +1,115 @@
 /* SignUp.css */
 
 .signup-container {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 40px;
-    border-radius: 10px;
-    background-image: url('https://chiemtaimobile.vn/images/companies/1/%E1%BA%A2nh%20Blog/hinh-nen-den/hinh-nen-den-tinh-yeu-4.jpg?1740726453418');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    color: #e6e1e1;
-  }
-  
-  .signup-container h2 {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #faf4f4;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  label {
-    font-weight: bold;
-    color: #f7f0f0;
-    margin-bottom: 1px;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="tel"] {
-    width: 100%;
-    padding: 12px;
-    font-size: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    display: block;
-  }
-  
-  button.dangky {
-    width: 100%;
-    padding: 12px;
-    background-color: #f38d64;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button.dangky:hover {
-    background-color: #e66b32;
-  }
-  
-  .error-message {
-    margin-top: 10px;
-    padding: 12px;
-    background-color: #f8d7da;
-    color: #721c24;
-    border-radius: 6px;
-    text-align: center;
-    font-size: 12px;
-  }
-  
-  p {
-    text-align: center;
-    margin-top: 15px;
-    color: #f1eeee;
-  }
-  
-  p a {
-    color: #fa6060;
-    text-decoration: underline;
-  }
-  
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 15px 25px;
+  border-radius: 20px;
+  background-image: url('https://thuthuatnhanh.com/wp-content/uploads/2021/05/hinh-nen-mau-hong-phan-dep-nhe-nhang.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  color: #1b1b1b;
+
+  /* Nền tối mờ phủ nhẹ để chữ dễ nhìn */
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.signup-container h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #181717;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Label */
+label {
+  font-weight: 500;
+  color: #464444;
+  margin-bottom: 3px;
+}
+
+/* --- INPUT ĐÃ ĐƯỢC CHỈNH SỬA ĐẸP --- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 14px;
+
+  border-radius: 30px;
+  /* BO GÓC TRÒN */
+  border: 1px solid rgba(72, 61, 61, 0.25);
+  /* VIỀN NHẠT */
+  background: rgba(158, 146, 146, 0.15);
+  /* TRONG SUỐT */
+  backdrop-filter: blur(6px);
+  /* Glass Effect */
+
+  color: #5e5959;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #e7dede;
+}
+
+/* --- BUTTON ĐĂNG KÝ --- */
+button.dangky {
+  width: 100%;
+  padding: 14px;
+  background-color: #f3307b;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  /* bo tròn */
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 5px 15px rgba(220, 15, 94, 0.4);
+}
+
+button.dangky:hover {
+  background-color: #a20f5b;
+  transform: translateY(-2px);
+}
+
+/* Thông báo lỗi */
+.error-message {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: rgba(28, 251, 69, 0.2);
+  color: #34b54b;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 13px;
+}
+
+/* Text dưới */
+p {
+  text-align: center;
+  margin-top: 15px;
+  color: #ffffff;
+}
+
+p a {
+  color: #ef0606;
+  text-decoration: underline;
+  font-weight: 500;
+}
