@@ -18,9 +18,7 @@ const Footer = () => {
           {/* Logo + social */}
           <div className="col-md-3 mb-4">
             <div className="d-flex align-items-center mb-3">
-              <span className="text-success ms-3 fs-5 fw-bold">
-                Shop Technology
-              </span>
+              <span className="text-success ms-3 fs-5 fw-bold">Nhóm 8</span>
             </div>
 
             <div className="d-flex gap-3 fs-4">
