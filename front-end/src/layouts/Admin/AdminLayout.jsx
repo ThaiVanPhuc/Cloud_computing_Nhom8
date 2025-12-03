@@ -19,11 +19,17 @@ const AdminLayout = ({ children }) => {
                 <nav className={styles.nav}>
                     
                     <Link
-                        to="/admin"
+                        to="/admin/tasks"
                         className={`${styles.navItem} ${location.pathname === '/admin' ? styles.active : ''}`}
                     >
-                        <FaChartPie className={styles.icon}/>  Task
+                       
                     </Link>
+<Link
+    to="/admin/tasks"
+    className={`${styles.navItem} ${location.pathname === '/admin/tasks' ? styles.active : ''}`}
+>
+    <FaClipboardList className={styles.icon}/> Manage Order
+</Link>
 
                     <Link
                         to="/admin/users"

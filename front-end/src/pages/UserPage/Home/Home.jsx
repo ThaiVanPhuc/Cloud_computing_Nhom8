@@ -171,7 +171,7 @@ const Home = ({ addtocart }) => {
                         marginBottom: "25px",
                       }}
                     >
-                      {slide.title || "Experience Innovation with Premium Tech"}
+                      {slide.title || "Welcome to Group 8 with Premium Tech"}
                     </h2>
                     <p
                       style={{

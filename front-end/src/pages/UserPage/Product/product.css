@@ -42,7 +42,7 @@
 
 .categories ul li:hover {
   background: #f0f0f0;
-  color: #0156ff;
+  color: #d45032;
   padding-left: 12px;
 }
 
@@ -146,7 +146,7 @@
 }
 
 .detail h4 {
-  color: #0156ff;
+  color: #a4201c;
   font-size: 17px;
   font-weight: bold;
 }
@@ -175,7 +175,7 @@
 .comments-section form button {
   padding: 10px 20px;
   border-radius: 8px;
-  background: #0156ff;
+  background: #fbc3bf;
   border: none;
   color: white;
   cursor: pointer;
@@ -183,7 +183,7 @@
 }
 
 .comments-section form button:hover {
-  background: #003fad;
+  background: #faa5a5;
 }
 /* === TOAST MESSAGE (giữa ngang, phía trên) === */
 .toast-message {
@@ -246,7 +246,7 @@
 }
 
 .toast-buttons button {
-  background-color: #2196f3; /* xanh dương */
+  background-color: #fd7070; /* xanh dương */
   color: #fff;
   border: none;
   padding: 6px 15px;
@@ -277,7 +277,7 @@
 }
 
 .categories ul li.active {
-  background-color: #2196f3; /* màu nổi bật */
+  background-color: #f7866d; /* màu nổi bật */
   color: #fff;
   font-weight: bold;
 }

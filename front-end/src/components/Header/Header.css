@@ -1,176 +1,364 @@
-/* --- Thông báo miễn phí vận chuyển --- */
-/* .free-shipping {
-    background: #007bff;
-    color: white;
-    text-align: center;
-    font-size: 14px;
-    padding: 6px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-  
-  .truck-icon {
-    font-size: 16px;
-  }
-   */
-/* --- Header --- */
-.main-header {
-  background: rgb(247, 217, 217);
-  padding: 5px 5px;
-  border-bottom: 1px solid #ddd;
-  height: 70px;
+/* Header.css */
+
+.modern-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(90deg, #ffe5e5 0%, #fbdada 40%, #fff0f0 100%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 10px 0;
+  transition: all 0.3s ease;
 }
 
-.container {
+.modern-header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Logo Section */
+.logo-section {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  gap: 10px;
+  text-decoration: none;
 }
 
-/* Logo */
-.logo img {
-  height: 35px;
+.logo-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-/* Ô tìm kiếm */
-.search-box {
+.logo-section:hover .logo-img {
+  transform: scale(1.1);
+}
+
+.logo-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff4d6d, #d63384);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation */
+.nav-links {
   display: flex;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  overflow: hidden;
-  width: 280px;
+  align-items: center;
+  gap: 24px;
+  margin: 0 auto;
 }
 
-.search-box input {
-  padding: 8px 12px;
-  border: none;
-  outline: none;
+.nav-link {
+  position: relative;
+  color: #333 !important;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  padding: 8px 12px !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ff4d6d !important;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff4d6d, #ff8fa3);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
   width: 100%;
 }
 
-.search-box .search-btn {
-  background: transparent;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
+/* Header Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-/* Icon menu */
-.nav-icons {
+/* Search */
+.search-wrapper {
+  position: relative;
+  width: 260px;
+  margin-right: 12px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 16px 10px 45px !important;
+  border: 2px solid #ffd1d1 !important;
+  border-radius: 30px !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  font-size: 14px;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 5px rgba(255, 192, 203, 0.3) !important;
+}
+
+.search-input:focus {
+  outline: none !important;
+  border-color: #ff8fa3 !important;
+  box-shadow: 0 0 8px rgba(255, 100, 100, 0.5) !important;
+}
+
+/* Icon Group */
+.icon-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 16px;
+  border-left: 2px solid #ffd1d1;
+}
+
+.icon-btn {
+  position: relative;
+  padding: 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.favorite-btn {
+  color: #ff4d6d;
+}
+
+.favorite-btn:hover {
+  background: #ffe5e5;
+  transform: scale(1.1);
+}
+
+.cart-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-btn {
+  color: #28a745;
+}
+
+.cart-btn:hover {
+  background: #e8f5e9;
+  transform: scale(1.1);
+}
+
+.user-btn {
+  color: #666;
+}
+
+.user-btn:hover {
+  background: #f5f5f5;
+  transform: scale(1.1);
+}
+
+/* Cart Badge */
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 6px;
+  text-align: center;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  z-index: 99;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* User Section */
+.user-section {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.icon-link {
-  font-size: 20px;
-  color: black;
-  transition: 0.3s;
-}
-
-.icon-link:hover {
-  color: #555;
-}
-
-/* Nút Đăng ký & Đăng nhập */
-.btn {
-  padding: 6px 12px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 14px;
-  color: black;
-  border: 1px solid #ccc;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background: #f1f1f1;
-}
-
-/* --- Navigation --- */
-.nav {
-  background: #f8f8f8;
-  padding: 8px 0;
-}
-
-.nav ul {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-}
-
-.nav-link {
-  color: black;
-  text-decoration: none;
-  font-size: 15px;
-  padding: 6px 12px;
-  transition: 0.3s;
-}
-
-.nav-link:hover {
-  color: #007bff;
-}
-
-.logo-container {
+.user-info {
   display: flex;
   align-items: center;
-  /* Căn giữa logo và chữ */
+  gap: 8px;
+  background: linear-gradient(135deg, #fff0f0, #ffe5e5);
+  padding: 8px 16px;
+  border-radius: 30px;
 }
 
-.logo img {
-  height: 50px;
-  /* Điều chỉnh kích thước logo */
-}
-
-.shop-name {
-  font-size: 24px;
-  font-weight: 600;
-  color: #81acdb;
-  margin-left: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.hover-link:hover {
-  color: #ff4d6d !important;
-  text-decoration: underline;
-}
-
-.icon-link:hover svg {
-  transform: scale(1.2);
-  transition: transform 0.2s ease;
-}
-
-.hover-link:hover {
-  color: #ff4d6d !important;
-  text-decoration: underline;
-}
-
-.icon-link:hover svg {
-  transform: scale(1.2);
-  transition: transform 0.2s ease;
-}
-
-.cart-badge {
-  position: absolute;
-  top: -1px;
-  /* lên trên đầu icon */
-  right: -6px;
-  /* lệch sang phải icon */
-  background: #ff4d6d;
-  /* màu đỏ nổi bật */
-  color: #fff;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 3px 6px;
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
   border-radius: 50%;
-  min-width: 20px;
-  text-align: center;
-  box-shadow: 0 0 2px rgba(138, 43, 43, 0.3);
-  /* làm nổi bật */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+/* Buttons */
+.btn-logout,
+.btn-signup,
+.btn-signin {
+  padding: 8px 16px !important;
+  border-radius: 30px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  cursor: pointer;
+  transition: all 0.3s ease !important;
+}
+
+.btn-logout {
+  background: linear-gradient(135deg, #ff4d6d, #ff8fa3) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.btn-logout:hover {
+  box-shadow: 0 4px 12px rgba(255, 77, 109, 0.4) !important;
+  transform: scale(1.05) !important;
+}
+
+.btn-signup {
+  background: transparent !important;
+  border: 2px solid #ddd !important;
+  color: #666 !important;
+}
+
+.btn-signup:hover {
+  border-color: #ff8fa3 !important;
+  background: #fff0f0 !important;
+  color: #666 !important;
+}
+
+.btn-signin {
+  background: linear-gradient(135deg, #ff4d6d, #ff8fa3) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.btn-signin:hover {
+  box-shadow: 0 4px 12px rgba(255, 77, 109, 0.4) !important;
+  transform: scale(1.05) !important;
+}
+
+/* Auth Section */
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .nav-links {
+    gap: 16px;
+  }
+  
+  .search-wrapper {
+    width: 200px;
+  }
+}
+
+@media (max-width: 992px) {
+  .search-wrapper {
+    width: 100%;
+    margin: 12px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-text {
+    font-size: 0.9rem;
+  }
+  
+  .logo-img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .user-name {
+    display: none;
+  }
+  
+  .btn-signup {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .btn-signin {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo-img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .logo-text {
+    font-size: 0.85rem;
+  }
+  
+  .icon-group {
+    gap: 6px;
+    padding-left: 10px;
+  }
+  
+  .icon-btn {
+    padding: 8px;
+  }
+  
+  .auth-section {
+    gap: 4px;
+  }
+  
+  .btn-signup,
+  .btn-signin {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+  }
 }

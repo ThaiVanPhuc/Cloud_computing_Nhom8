@@ -44,7 +44,7 @@ const SignIn = () => {
         // ✅ Điều hướng theo vai trò
         const role = user.role?.toLowerCase();
         if (role === 'admin') {
-          navigate('/admin/products');
+          navigate('/admin/tasks');
         } else {
           navigate('/');
         }

@@ -1,235 +1,533 @@
+// New.module.scss - Card Grid Design (No Table)
+
 .container {
-    padding: 30px;
-    max-width: 1200px;
-    margin: auto;
+    padding: 0;
+    background: transparent;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 20px;
 }
 
 .title {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 25px;
-    color: #333;
-    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #fff 0%, #a8edea 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .addBtn {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: #fff;
-    padding: 10px 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
     border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    margin-bottom: 20px;
-    transition: 0.3s;
-}
-
-.addBtn:hover {
-    background: linear-gradient(135deg, #43a047, #388e3c);
-    transform: translateY(-2px);
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #ffffff;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.table thead {
-    background: #a8b9ec;
-}
-
-.table th,
-.table td {
-    padding: 14px 15px;
-    text-align: left;
+    border-radius: 14px;
+    color: #1e293b;
     font-size: 14px;
-}
-
-.table tbody tr {
-    border-bottom: 1px solid #eee;
-    transition: 0.2s;
-}
-
-.table tbody tr:hover {
-    background: #f4f7ff;
-}
-
-.table img {
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.iconBtn {
-    background: none;
-    border: none;
+    font-weight: 700;
     cursor: pointer;
-    padding: 6px;
-    margin-right: 6px;
-    border-radius: 50%;
-    transition: 0.2s;
+    box-shadow: 0 4px 16px rgba(168, 237, 234, 0.3);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(168, 237, 234, 0.5);
+    }
 }
 
-.editIcon {
-    color: #2196F3;
+.newsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.newsCard {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+
+        .newsImage img {
+            transform: scale(1.08);
+        }
+
+        .cardActions {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+.newsImage {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .noImage {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #94a3b8;
+        font-size: 48px;
+        opacity: 0.3;
+    }
+}
+
+.newsContent {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.newsNumber {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    color: #1e293b;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.newsTitle {
     font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 50px;
 }
 
-.deleteIcon {
-    color: #e53935;
-    font-size: 18px;
+.newsText {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
 }
 
-.iconBtn:hover {
-    background: #eee;
+.newsDate {
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &::before {
+        content: '📅';
+        font-size: 14px;
+    }
 }
 
+.cardActions {
+    display: flex;
+    gap: 8px;
+    padding: 0 20px 20px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s ease;
 
-/* Pagination */
+    button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-weight: 600;
+    }
+}
+
+.editBtn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(102, 126, 234, 0.3);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+    }
+}
+
+.deleteBtn {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(239, 68, 68, 0.3);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
+    }
+}
+
 .pagination {
-    margin-top: 20px;
     display: flex;
     justify-content: center;
-    gap: 15px;
     align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+    button {
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        border: none;
+        border-radius: 10px;
+        color: #1e293b;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(168, 237, 234, 0.3);
+
+        &:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(168, 237, 234, 0.4);
+        }
+
+        &:disabled {
+            background: #e2e8f0;
+            color: #94a3b8;
+            cursor: not-allowed;
+            opacity: 0.6;
+            box-shadow: none;
+        }
+    }
+
+    span {
+        font-weight: 800;
+        font-size: 14px;
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        padding: 0 8px;
+    }
 }
 
-.pagination button {
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: none;
-    background: #1976d2;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.pagination button:disabled {
-    background: #9e9e9e;
-    cursor: not-allowed;
-}
-
-.pagination button:hover:not(:disabled) {
-    transform: translateY(-2px);
-    background: #0d47a1;
-}
-
-.pagination span {
-    font-size: 15px;
-    font-weight: 600;
-    color: #333;
-}
-
-/* MODAL */
 .modalOverlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
     display: flex;
-    align-items: center;
     justify-content: center;
-    z-index: 999;
-    animation: fade 0.2s ease-in-out;
-}
-
-@keyframes fade {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+    padding: 20px;
 }
 
 .modalContent {
     background: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    width: 450px;
-    max-width: 90%;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
-    animation: slideUp 0.25s ease;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.modalContent h2,
-.modalContent h3 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.form input,
-.form textarea {
+    padding: 32px;
+    border-radius: 24px;
     width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    margin-bottom: 12px;
-    font-size: 14px;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+    animation: modalSlide 0.4s ease;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
+        border-radius: 24px 24px 0 0;
+    }
+
+    h2, h3 {
+        font-size: 26px;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 24px;
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    p {
+        color: #64748b;
+        font-size: 15px;
+        margin-bottom: 20px;
+
+        strong {
+            color: #1e293b;
+            font-weight: 700;
+            font-size: 16px;
+        }
+    }
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        border-radius: 10px;
+    }
 }
 
-.form textarea {
-    height: 100px;
-    resize: vertical;
-}
-
-/* Buttons */
-.modalButtons {
+.form {
     display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
+    flex-direction: column;
+    gap: 16px;
 
-.saveBtn {
-    background: #1976d2;
-    color: white;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.2s;
-}
+    input, textarea {
+        width: 100%;
+        padding: 14px 18px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #1e293b;
+        background: #fff;
+        transition: all 0.3s ease;
+        outline: none;
+        font-family: inherit;
 
-.saveBtn:hover {
-    background: #0d47a1;
-}
+        &:focus {
+            border-color: #a8edea;
+            box-shadow: 0 0 0 4px rgba(168, 237, 234, 0.15);
+        }
 
-.cancelBtn {
-    background: #9e9e9e;
-    color: white;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
+        &::placeholder {
+            color: #94a3b8;
+        }
+    }
 
-.cancelBtn:hover {
-    background: #757575;
-}
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
 
-.deleteBtn {
-    background: #d32f2f;
-    color: white;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
+    input[type="file"] {
+        cursor: pointer;
+        padding: 12px;
+        font-size: 13px;
+        
+        &::file-selector-button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border: none;
+            border-radius: 10px;
+            color: #1e293b;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 12px;
+            transition: all 0.3s ease;
+            font-size: 13px;
 
-.deleteBtn:hover {
-    background: #b71c1c;
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 16px rgba(168, 237, 234, 0.4);
+            }
+        }
+    }
 }
 
 .error {
-    color: #e53935;
-    text-align: center;
-    margin-bottom: 10px;
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #dc2626;
+    padding: 14px 18px;
+    border-radius: 12px;
     font-weight: 600;
+    font-size: 13px;
+    border: 2px solid #fca5a5;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+.modalButtons {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+
+    button {
+        flex: 1;
+        padding: 14px 24px;
+        border: none;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+}
+
+.saveBtn {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    color: #1e293b;
+    box-shadow: 0 6px 20px rgba(168, 237, 234, 0.3);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(168, 237, 234, 0.5);
+    }
+}
+
+.cancelBtn {
+    background: #e2e8f0;
+    color: #475569;
+
+    &:hover {
+        background: #cbd5e1;
+    }
+}
+
+// Animations
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlide {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+
+    .addBtn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .newsGrid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .modalContent {
+        padding: 24px;
+
+        h2, h3 {
+            font-size: 22px;
+        }
+    }
+
+    .pagination {
+        flex-direction: column;
+        gap: 12px;
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .modalButtons {
+        flex-direction: column;
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .cardActions {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.imagePreview {
+    margin: 10px 0;
+    width: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+
+    img {
+        width: auto;
+        max-width: 100%;
+        max-height: 200px;
+        object-fit: contain;
+    }
 }
