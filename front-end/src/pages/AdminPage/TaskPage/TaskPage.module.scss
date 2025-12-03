@@ -1,0 +1,111 @@
+.taskPage {
+    padding: 20px;
+    font-family: "Inter", sans-serif;
+}
+
+.pageTitle {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* ------ Summary Cards ------ */
+.summaryGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.cardLabel {
+    font-size: 14px;
+    color: #444;
+}
+
+.cardValue {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 6px;
+}
+
+.cardDown {
+    color: red;
+    font-size: 13px;
+}
+
+/* ------ Filters ------ */
+.filterBar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+
+    select {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+}
+
+/* ------ Table ------ */
+.tableTitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.tableWrapper {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+        text-align: left;
+        padding: 12px 8px;
+        background: #f7f7f7;
+        font-size: 14px;
+    }
+
+    td {
+        padding: 10px 8px;
+        font-size: 14px;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+/* Platform labels */
+.platform {
+    padding: 6px 10px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.lazada { background: #e61f28; }
+.shopee { background: #ff5722; }
+.tiktok { background: #000; }
+.iconBox {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #eef3ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #4a6cf7;
+    margin-bottom: 10px;
+}

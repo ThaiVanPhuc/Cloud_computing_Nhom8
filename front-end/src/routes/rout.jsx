@@ -13,6 +13,7 @@ import SearchPage from "../pages/UserPage/Product/searchProduct";
 import AdminNewPage from '../pages/AdminPage/NewPage';
 import NewPage from '../pages/UserPage/News/new';
 import NewsDetail from '../pages/UserPage/News/NewsDetail';
+import AdminTaskPage from '../pages/AdminPage/TaskPage/TaskPage';
 
 
 const Rout = ({
@@ -81,6 +82,18 @@ const Rout = ({
 
         {/* ===================== ADMIN ROUTES ===================== */}
 
+        {/* ===== TASK PAGE ROUTE ===== */}
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminLayout>
+                <AdminTaskPage />
+              </AdminLayout>
+            </AdminRoute>
+          }
+        />
+
         <Route
           path="/admin/users"
           element={
@@ -104,15 +117,6 @@ const Rout = ({
         />
 
         <Route
-          path="/admin"
-          element={
-            <AdminRoute>
-              <AdminLayout />
-            </AdminRoute>
-          }
-        />
-
-        <Route
           path="/admin/news"
           element={
             <AdminRoute>
@@ -122,7 +126,16 @@ const Rout = ({
             </AdminRoute>
           }
         />
-
+<Route
+          path="/admin/tasks"
+          element={
+            <AdminRoute>
+              <AdminLayout>
+                <AdminTaskPage />
+              </AdminLayout>
+            </AdminRoute>
+          }
+        />
       </Routes>
     </>
   );

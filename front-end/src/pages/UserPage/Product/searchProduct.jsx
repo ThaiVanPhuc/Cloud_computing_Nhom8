@@ -2,75 +2,62 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import httpRequest from "../../../utils/httpRequest";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import "./search.css";
 import { getImageUrl } from "../../../utils/image";
+import "./search.css";
 
 const SearchPage = ({ addtocart }) => {
   const location = useLocation();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Lấy từ khóa tìm kiếm từ URL
   const query = new URLSearchParams(location.search).get("keyword");
 
   useEffect(() => {
-  if (!query) return;
+    if (!query) return;
 
-  const fetchProducts = async () => {
-    try {
-      const res = await httpRequest.get(`products/search?search=${query}`);
-      setProducts(res.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const fetchProducts = async () => {
+      try {
+        const res = await httpRequest.get(`products/search?search=${query}`);
+        setProducts(res.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchProducts();
-}, [query]);
-
+    fetchProducts();
+  }, [query]);
 
   return (
-    <Container className="mt-4 text-center ">
-      <h4>
-        Kết quả tìm kiếm cho: "<strong>{query}</strong>"
+   <Container className="mt-4 search-container">
+      <h4 className="search-heading">
+        Kết quả tìm kiếm cho: <strong>{query}</strong>
       </h4>
 
       {loading ? (
-        <p>Đang tải...</p>
+        <p className="loading-text">Đang tải...</p>
       ) : products.length === 0 ? (
-        <p>Không tìm thấy sản phẩm nào.</p>
+        <p className="no-result-text">Không tìm thấy sản phẩm nào.</p>
       ) : (
         <Row className="g-4">
           {products.map((product) => (
-            <Col md={3} key={product._id} className="mb-4">
-              <div className="product-card shadow-sm rounded">
-                <div className="img-container">
+            <Col md={3} sm={6} xs={12} key={product._id}>
+              <div className="product-card">
+                <div className="product-img-wrapper">
                   <img
                     src={getImageUrl(product.Img)}
                     alt={product.Title}
-                    style={{
-                      width: "100%",
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                    }}
+                    className="product-img"
                   />
                 </div>
-                <div className="p-3">
-                  <h5 className="product-title text-center">{product.Title}</h5>
-                  <p
-                    className="product-description"
-                    style={{ color: "grey", fontSize: "14px" }}
-                  >
-                    Đã bán {product.Luotban} lượt
-                  </p>
-
+                <div className="product-info">
+                  <h5 className="product-title">{product.Title}</h5>
+                  <p className="product-sold">Đã bán {product.Luotban} lượt</p>
                   <div className="d-flex justify-content-between align-items-center">
-                    <h6 className="product-price">
+                    <span className="product-price">
                       {parseFloat(product.Price).toLocaleString("vi-VN")} VND
-                    </h6>
-
+                    </span>
                     <Button
                       variant="success"
                       className="add-to-cart-btn"

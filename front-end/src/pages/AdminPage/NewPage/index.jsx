@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./New.module.scss";
 import * as newsServices from "../../../services/newServices";
 import { getImageUrl } from "../../../utils/image";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash, FaImage } from "react-icons/fa";
 
 const AdminNewsPage = () => {
     const [newsList, setNewsList] = useState([]);
@@ -128,52 +128,47 @@ const AdminNewsPage = () => {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>News Management</h1>
-            <button className={styles.addBtn} onClick={handleAddClick}>Thêm bài viết</button>
+            <div className={styles.header}>
+                <h1 className={styles.title}>News Management</h1>
+                <button className={styles.addBtn} onClick={handleAddClick}>
+                    Thêm bài viết
+                </button>
+            </div>
 
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Tiêu đề</th>
-                        <th>Nội dung</th>
-                        <th>Hình ảnh</th>
-                        <th>Ngày tạo</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {newsList.map((item, index) => (
-                        <tr key={item._id}>
-                            <td>{(page - 1) * 5 + index + 1}</td>
-                            <td>{item.title}</td>
-                            <td>{item.content}</td>
-                            <td>
-                                {item.imgStory && (
-                                    <img
-                                        src={getImageUrl(item.imgStory)}
-                                        alt="img"
-                                        width={100}
-                                    />
-                                )}
-                            </td>
-                            <td>{new Date(item.createdAt).toLocaleDateString()}</td>
-                            <td>
+            {/* Card Grid Layout */}
+            <div className={styles.newsGrid}>
+                {newsList.map((item, index) => (
+                    <div key={item._id} className={styles.newsCard}>
+                        <div className={styles.newsImage}>
+                            {item.imgStory ? (
+                                <img src={getImageUrl(item.imgStory)} alt={item.title} />
+                            ) : (
+                                <div className={styles.noImage}>
+                                    <FaImage />
+                                </div>
+                            )}
+                        </div>
+                        
+                        <div className={styles.newsContent}>
+                            <span className={styles.newsNumber}>#{(page - 1) * 5 + index + 1}</span>
+                            <h3 className={styles.newsTitle}>{item.title}</h3>
+                            <p className={styles.newsText}>{item.content}</p>
+                            <p className={styles.newsDate}>
+                                {new Date(item.createdAt).toLocaleDateString('vi-VN')}
+                            </p>
+                        </div>
 
-                                <button className={styles.iconBtn} onClick={() => handleEdit(item)}>
-                                    <FaEdit className={styles.editIcon} />
-                                </button>
-
-                                {/* FIX ĐÚNG 100% TẠI ĐÂY */}
-                                <button className={styles.iconBtn} onClick={() => confirmDelete(item)}>
-                                    <FaTrash className={styles.deleteIcon} />
-                                </button>
-
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                        <div className={styles.cardActions}>
+                            <button className={styles.editBtn} onClick={() => handleEdit(item)}>
+                                <FaEdit /> Sửa
+                            </button>
+                            <button className={styles.deleteBtn} onClick={() => confirmDelete(item)}>
+                                <FaTrash /> Xóa
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
             <div className={styles.pagination}>
                 <button disabled={page === 1} onClick={() => setPage(page - 1)}>&laquo; Prev</button>
@@ -186,38 +181,50 @@ const AdminNewsPage = () => {
                     <div className={styles.modalContent}>
                         <h2>{formData.id ? "Cập nhật bài viết" : "Thêm bài viết"}</h2>
                         {error && <p className={styles.error}>{error}</p>}
-                        <form onSubmit={handleSubmit} className={styles.form}>
-                            <input
-                                type="text"
-                                name="title"
-                                placeholder="Tiêu đề"
-                                value={formData.title}
-                                onChange={handleChange}
-                                required
-                            />
-                            <textarea
-                                name="content"
-                                placeholder="Nội dung"
-                                value={formData.content}
-                                onChange={handleChange}
-                                required
-                            />
-                            <input
-                                type="file"
-                                name="imgStory"
-                                accept="image/*"
-                                onChange={handleChange}
-                                required={!formData.id}
-                            />
-                            <div className={styles.modalButtons}>
-                                <button type="submit" className={styles.saveBtn}>
-                                    {formData.id ? "Cập nhật" : "Thêm"}
-                                </button>
-                                <button type="button" className={styles.cancelBtn} onClick={closeModal}>
-                                    Hủy
-                                </button>
-                            </div>
-                        </form>
+                       <form onSubmit={handleSubmit} className={styles.form}>
+    <input
+        type="text"
+        name="title"
+        placeholder="Tiêu đề"
+        value={formData.title}
+        onChange={handleChange}
+        required
+    />
+    <textarea
+        name="content"
+        placeholder="Nội dung"
+        value={formData.content}
+        onChange={handleChange}
+        required
+    />
+    <input
+        type="file"
+        name="imgStory"
+        accept="image/*"
+        onChange={handleChange}
+        required={!formData.id}
+    />
+
+    {/* Hiển thị preview ảnh nếu có */}
+    {formData.imgStory && (
+        <div className={styles.imagePreview}>
+            <img
+                src={formData.imgStory instanceof File ? URL.createObjectURL(formData.imgStory) : getImageUrl(formData.imgStory)}
+                alt="preview"
+            />
+        </div>
+    )}
+
+    <div className={styles.modalButtons}>
+        <button type="submit" className={styles.saveBtn}>
+            {formData.id ? "Cập nhật" : "Thêm"}
+        </button>
+        <button type="button" className={styles.cancelBtn} onClick={closeModal}>
+            Hủy
+        </button>
+    </div>
+</form>
+
                     </div>
                 </div>
             )}
