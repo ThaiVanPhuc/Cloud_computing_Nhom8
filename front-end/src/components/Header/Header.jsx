@@ -91,12 +91,8 @@ const Header = () => {
     >
       <Container>
         <Navbar.Brand as={Link} to="/" className="logo-section">
-          <img
-            src={logo}
-            alt="logo"
-            className="logo-img"
-          />
-          <span className="logo-text">TECHNOLOGY SHOP</span>
+          <img src={logo} alt="logo" className="logo-img" />
+          <span className="logo-text">Nhóm 8</span>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbar-nav" />
@@ -140,32 +136,32 @@ const Header = () => {
           {/* ICONS */}
           <div className="icon-group">
             <div style={{ position: "relative", display: "inline-block" }}>
-                <Link to="/cart" className="icon-link">
-                  <FaShoppingBag size={22} color="#28a745" />
-                </Link>
+              <Link to="/cart" className="icon-link">
+                <FaShoppingBag size={22} color="#28a745" />
+              </Link>
 
-                {cartCount > 0 && (
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: "-6px",
-                      right: "-10px",
-                      background: "#ff4d6d",
-                      color: "#fff",
-                      fontSize: "10px",
-                      fontWeight: "bold",
-                      padding: "3px 6px",
-                      borderRadius: "50%",
-                      minWidth: "20px",
-                      textAlign: "center",
-                      boxShadow: "0 0 2px rgba(0,0,0,0.3)",
-                      zIndex: 99,
-                    }}
-                  >
-                    {cartCount}
-                  </span>
-                )}
-              </div>
+              {cartCount > 0 && (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-6px",
+                    right: "-10px",
+                    background: "#ff4d6d",
+                    color: "#fff",
+                    fontSize: "10px",
+                    fontWeight: "bold",
+                    padding: "3px 6px",
+                    borderRadius: "50%",
+                    minWidth: "20px",
+                    textAlign: "center",
+                    boxShadow: "0 0 2px rgba(0,0,0,0.3)",
+                    zIndex: 99,
+                  }}
+                >
+                  {cartCount}
+                </span>
+              )}
+            </div>
 
             {user ? (
               <div className="user-section">
@@ -190,7 +186,11 @@ const Header = () => {
                   <FaUser size={20} />
                 </Link>
                 <Link to="/signup">
-                  <Button variant="outline-secondary" size="sm" className="btn-signup">
+                  <Button
+                    variant="outline-secondary"
+                    size="sm"
+                    className="btn-signup"
+                  >
                     Sign up
                   </Button>
                 </Link>
