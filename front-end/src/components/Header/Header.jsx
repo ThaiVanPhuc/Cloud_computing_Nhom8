@@ -92,7 +92,7 @@ const Header = () => {
       <Container>
         <Navbar.Brand as={Link} to="/" className="logo-section">
           <img src={logo} alt="logo" className="logo-img" />
-          <span className="logo-text">Nhóm 8</span>
+          <span className="logo-text">Puc Shop</span>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbar-nav" />
