@@ -1,0 +1,14 @@
+Data ID,Data Type,Description,Sample Value,Used in Test Cases
+TD_USER_001,User Credentials,Valid user login,email: user@example.com, password: Pass123!,TC_AUTH_001, TC_AUTH_004
+TD_USER_002,User Credentials,Invalid user login,email: invalid@example.com, password: wrong,TC_AUTH_003
+TD_USER_003,User Registration,Valid registration data,username: testuser, email: new@example.com, password: Pass123!,TC_AUTH_007
+TD_USER_004,User Registration,Existing email,email: user@example.com,TC_AUTH_008
+TD_PRODUCT_001,Product Data,Sample product,Name: Laptop, Price: 1000, Category: Electronics,TC_PROD_001, TC_PROD_002
+TD_PRODUCT_002,Product Search,Search keyword,Laptop,TC_PROD_003
+TD_CART_001,Cart Item,Cart addition,Product ID: 1, Quantity: 2,TC_CART_001
+TD_CHECKOUT_001,Address Data,Shipping address,Name: John Doe, Address: 123 Main St, City: NY,TC_CHECKOUT_002
+TD_CHECKOUT_002,Payment Data,Valid card,Card: 4111111111111111, Expiry: 12/25, CVV: 123,TC_CHECKOUT_004
+TD_ORDER_001,Order Data,Sample order,Order ID: ORD001, Status: Pending,TC_ORDER_001
+TD_ADMIN_001,Admin Credentials,Admin login,email: admin@example.com, password: Admin123!,TC_AUTH_002
+TD_REVIEW_001,Review Data,Sample review,Rating: 5, Comment: Great product!,TC_REVIEW_002
+TD_NOTIF_001,Notification Data,Email template,Subject: Order Confirmation, Body: Your order...,TC_NOTIF_001

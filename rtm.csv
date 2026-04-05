@@ -1,0 +1,15 @@
+Requirement ID,Requirement Description,Test Cases,Status
+REQ_AUTH_001,User must be able to login with email and password,TC_AUTH_001, TC_AUTH_002, TC_AUTH_003, TC_AUTH_004,Covered
+REQ_AUTH_002,User must be able to register new account,TC_AUTH_007, TC_AUTH_008, TC_AUTH_009,Covered
+REQ_AUTH_003,OTP verification for enhanced security,TC_AUTH_011, TC_AUTH_012, TC_AUTH_013,Covered
+REQ_PROD_001,Users can view product list and details,TC_PROD_001, TC_PROD_002,Covered
+REQ_PROD_002,Search and filter products,TC_PROD_003, TC_PROD_004, TC_PROD_005, TC_PROD_006,Covered
+REQ_CART_001,Add, update, remove items from cart,TC_CART_001, TC_CART_002, TC_CART_004, TC_CART_005,Covered
+REQ_CHECKOUT_001,Complete checkout process,TC_CHECKOUT_001 to TC_CHECKOUT_020,Covered
+REQ_ORDER_001,View and manage orders,TC_ORDER_001 to TC_ORDER_020,Covered
+REQ_PROFILE_001,Manage user profile,TC_PROFILE_001 to TC_PROFILE_020,Covered
+REQ_ADMIN_USER_001,Admin manage users,TC_ADMIN_USER_001 to TC_ADMIN_USER_020,Covered
+REQ_ADMIN_PRODUCT_001,Admin manage products,TC_ADMIN_PRODUCT_001 to TC_ADMIN_PRODUCT_020,Covered
+REQ_ADMIN_ORDER_001,Admin manage orders,TC_ADMIN_ORDER_001 to TC_ADMIN_ORDER_020,Covered
+REQ_REVIEW_001,Review and rating system,TC_REVIEW_001 to TC_REVIEW_020,Covered
+REQ_NOTIF_001,Notification system,TC_NOTIF_001 to TC_NOTIF_020,Covered

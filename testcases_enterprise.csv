@@ -1,0 +1,221 @@
+ID,Module,Title,Preconditions,Steps,Expected Result,Priority,Severity,Type
+TC_AUTH_001,Authentication,Successful User Login,User has valid account and is on login page,1. Open the login page. 2. Enter valid email in email field. 3. Enter valid password in password field. 4. Click the 'Login' button.,User is logged in successfully, redirected to home page, and session is created.,High,Critical,Functional
+TC_AUTH_002,Authentication,Successful Admin Login,Admin has valid account and is on login page,1. Open the login page. 2. Enter valid admin email. 3. Enter valid admin password. 4. Click 'Login'.,Admin is logged in, redirected to admin dashboard.,High,Critical,Functional
+TC_AUTH_003,Authentication,Login with Invalid Email,User is on login page,1. Enter invalid email format (e.g., abc@). 2. Enter valid password. 3. Click 'Login'.,Error message: 'Invalid email format' displayed.,Medium,Major,Validation
+TC_AUTH_004,Authentication,Login with Wrong Password,User has account and is on login page,1. Enter valid email. 2. Enter incorrect password. 3. Click 'Login'.,Error message: 'Invalid credentials' displayed.,High,Major,Functional
+TC_AUTH_005,Authentication,Login with Empty Fields,User is on login page,1. Leave email and password fields empty. 2. Click 'Login'.,Error messages for both fields: 'Email is required', 'Password is required'.,Medium,Major,Validation
+TC_AUTH_006,Authentication,Login with SQL Injection Attempt,User is on login page,1. Enter email: ' OR '1'='1. 2. Enter password: anything. 3. Click 'Login'.,Login fails, no unauthorized access.,High,Critical,Security
+TC_AUTH_007,Authentication,Successful User Registration,User is on registration page,1. Enter unique username. 2. Enter valid email. 3. Enter password (min 8 chars). 4. Confirm password. 5. Click 'Register'.,User registered, success message, redirected to login.,High,Critical,Functional
+TC_AUTH_008,Authentication,Registration with Existing Email,User is on registration page,1. Enter existing email. 2. Enter other details. 3. Click 'Register'.,Error: 'Email already exists'.,Medium,Major,Validation
+TC_AUTH_009,Authentication,Registration with Weak Password,User is on registration page,1. Enter details with password <8 chars. 2. Click 'Register'.,Error: 'Password must be at least 8 characters'.,Medium,Major,Validation
+TC_AUTH_010,Authentication,Registration with Mismatched Passwords,User is on registration page,1. Enter password. 2. Enter different confirm password. 3. Click 'Register'.,Error: 'Passwords do not match'.,Medium,Major,Validation
+TC_AUTH_011,Authentication,OTP Verification for Login,User enabled 2FA and is on OTP page,1. Enter valid OTP from email/SMS. 2. Click 'Verify'.,Login successful.,High,Critical,Functional
+TC_AUTH_012,Authentication,Invalid OTP,User on OTP page,1. Enter wrong OTP. 2. Click 'Verify'.,Error: 'Invalid OTP'.,High,Major,Functional
+TC_AUTH_013,Authentication,OTP Resend,User on OTP page,1. Click 'Resend OTP'.,New OTP sent, message displayed.,Medium,Minor,Functional
+TC_AUTH_014,Authentication,Session Timeout,User logged in,1. Wait for session to expire (e.g., 30 min). 2. Try to access protected page.,Redirected to login.,Medium,Major,Functional
+TC_AUTH_015,Authentication,Logout,User logged in,1. Click 'Logout' button.,User logged out, redirected to login.,High,Critical,Functional
+TC_AUTH_016,Authentication,Remember Me Login,User checked remember me previously,1. Close browser. 2. Reopen and go to site.,User still logged in.,Medium,Minor,Functional
+TC_AUTH_017,Authentication,Password Reset Request,User forgot password,1. Click 'Forgot Password'. 2. Enter email. 3. Click 'Send Reset Link'.,Reset link sent to email.,Medium,Major,Functional
+TC_AUTH_018,Authentication,Password Reset with Valid Token,User received reset link,1. Click link in email. 2. Enter new password. 3. Confirm. 4. Click 'Reset'.,Password updated, login with new password works.,High,Critical,Functional
+TC_AUTH_019,Authentication,Password Reset with Expired Token,Reset link expired,1. Click expired link.,Error: 'Link expired'.,Medium,Major,Functional
+TC_AUTH_020,Authentication,Account Lock After Failed Attempts,User has account,1. Attempt login 5 times with wrong password.,Account locked, message displayed.,High,Major,Security
+TC_PROD_001,Product,View Product List,User logged in,1. Navigate to product page.,Product list displayed with images, names, prices.,High,Critical,Functional
+TC_PROD_002,Product,View Product Detail,User on product list,1. Click on a product name/image.,Product detail page opens with full info.,High,Critical,Functional
+TC_PROD_003,Product,Product Search by Name,User on product page,1. Enter product name in search bar. 2. Click search.,Matching products displayed.,High,Critical,Functional
+TC_PROD_004,Product,Product Search No Results,User on product page,1. Enter non-existent keyword. 2. Click search.,'No products found' message.,Medium,Major,Functional
+TC_PROD_005,Product,Filter by Category,User on product page,1. Select category from filter. 2. Click apply.,Products filtered by category.,High,Critical,Functional
+TC_PROD_006,Product,Filter by Price Range,User on product page,1. Set min and max price. 2. Click apply.,Products within range displayed.,Medium,Major,Functional
+TC_PROD_007,Product,Sort by Price Low to High,User on product page,1. Select sort option 'Price: Low to High'.,Products sorted ascending.,Medium,Minor,Functional
+TC_PROD_008,Product,Sort by Name,User on product page,1. Select sort 'Name A-Z'.,Products sorted alphabetically.,Medium,Minor,Functional
+TC_PROD_009,Product,Pagination,User on product page with many products,1. Click page 2.,Next set of products displayed.,Medium,Minor,Functional
+TC_PROD_010,Product,Product Image Zoom,User on product detail,1. Click on product image.,Image zooms in.,Low,Minor,UI
+TC_PROD_011,Product,Out of Stock Product,User views out of stock product,1. Check product status.,'Out of Stock' label shown, add to cart disabled.,Medium,Major,Functional
+TC_PROD_012,Product,Product Rating Display,User on product detail,1. Look at rating section.,Average rating and reviews shown.,Low,Minor,UI
+TC_PROD_013,Product,Related Products,User on product detail,1. Scroll to related products.,Similar products displayed.,Low,Minor,Functional
+TC_PROD_014,Product,Product Share,User on product detail,1. Click share button. 2. Select social media.,Share link generated.,Low,Minor,Functional
+TC_PROD_015,Product,Quick View,User on product list,1. Click quick view icon.,Product preview modal opens.,Medium,Minor,UI
+TC_PROD_016,Product,Filter Reset,User applied filters,1. Click 'Reset Filters'.,All filters cleared, all products shown.,Medium,Minor,Functional
+TC_PROD_017,Product,Search with Special Characters,User on product page,1. Enter search with symbols (e.g., @#$).,No crash, appropriate message.,Low,Minor,Validation
+TC_PROD_018,Product,Product Load Time,User on product page,1. Load page.,Page loads within 3 seconds.,Medium,Major,Performance
+TC_PROD_019,Product,Product Image Alt Text,User on product page,1. Inspect image alt.,Alt text present for accessibility.,Low,Minor,Accessibility
+TC_PROD_020,Product,Product Description Length,User views product,1. Check description.,Description not truncated improperly.,Low,Minor,UI
+TC_CART_001,Cart,Add Product to Cart,User on product detail,1. Select quantity. 2. Click 'Add to Cart'.,Product added, cart count increases.,High,Critical,Functional
+TC_CART_002,Cart,Add Multiple Quantities,User on product detail,1. Set quantity to 5. 2. Click 'Add to Cart'.,5 items added to cart.,Medium,Major,Functional
+TC_CART_003,Cart,View Cart,User has items in cart,1. Click cart icon.,Cart page opens with items.,High,Critical,Functional
+TC_CART_004,Cart,Update Cart Quantity,User on cart page,1. Change quantity of item. 2. Click update.,Quantity updated, total recalculated.,High,Critical,Functional
+TC_CART_005,Cart,Remove Item from Cart,User on cart page,1. Click remove on item.,Item removed, total updated.,High,Critical,Functional
+TC_CART_006,Cart,Empty Cart,User on cart page,1. Remove all items.,Cart empty message displayed.,Medium,Major,Functional
+TC_CART_007,Cart,Cart Persistence,User adds to cart, logs out, logs back in,1. Add item. 2. Logout. 3. Login. 4. Check cart.,Item still in cart.,High,Critical,Functional
+TC_CART_008,Cart,Cart Total Calculation,User on cart page,1. Add multiple items.,Total price correct.,High,Critical,Functional
+TC_CART_009,Cart,Cart with Discounts,User has coupon,1. Apply coupon code.,Discount applied to total.,Medium,Major,Functional
+TC_CART_010,Cart,Invalid Coupon,User on cart,1. Enter invalid coupon. 2. Apply.,Error: 'Invalid coupon'.,Medium,Major,Validation
+TC_CART_011,Cart,Cart Limit Exceeded,User tries to add more than stock,1. Add quantity > stock.,Error: 'Not enough stock'.,Medium,Major,Validation
+TC_CART_012,Cart,Cart Save for Later,User on cart,1. Click 'Save for Later' on item.,Item moved to saved list.,Low,Minor,Functional
+TC_CART_013,Cart,Cart Merge on Login,Guest user adds to cart, logs in,1. Add item as guest. 2. Login.,Cart merged with user cart.,Medium,Major,Functional
+TC_CART_014,Cart,Cart Checkout Button,User on cart,1. Click 'Checkout'.,Redirected to checkout page.,High,Critical,Functional
+TC_CART_015,Cart,Cart Item Image,User on cart,1. Check item image.,Image matches product.,Low,Minor,UI
+TC_CART_016,Cart,Cart Subtotal,User on cart,1. View subtotal.,Correct calculation.,Medium,Major,Functional
+TC_CART_017,Cart,Cart Tax Calculation,User on cart,1. View tax.,Tax applied correctly.,Medium,Major,Functional
+TC_CART_018,Cart,Cart Shipping Cost,User on cart,1. View shipping.,Shipping calculated based on address.,Medium,Major,Functional
+TC_CART_019,Cart,Cart Continue Shopping,User on cart,1. Click 'Continue Shopping'.,Redirected to product page.,Low,Minor,Functional
+TC_CART_020,Cart,Cart Empty on Logout,User logs out,1. Check cart after logout.,Cart cleared if not saved.,Medium,Minor,Functional
+TC_CHECKOUT_001,Checkout,Checkout Page Access,User has items in cart,1. Click 'Checkout'.,Checkout page loads.,High,Critical,Functional
+TC_CHECKOUT_002,Checkout,Enter Shipping Address,User on checkout,1. Fill address form. 2. Click next.,Address saved.,High,Critical,Functional
+TC_CHECKOUT_003,Checkout,Invalid Address,User on checkout,1. Leave required fields empty. 2. Click next.,Validation errors.,Medium,Major,Validation
+TC_CHECKOUT_004,Checkout,Select Payment Method,User on checkout,1. Choose credit card. 2. Enter details.,Payment method selected.,High,Critical,Functional
+TC_CHECKOUT_005,Checkout,Invalid Payment Details,User on checkout,1. Enter invalid card number. 2. Submit.,Error: 'Invalid card'.,High,Major,Validation
+TC_CHECKOUT_006,Checkout,Apply Promo Code,User on checkout,1. Enter valid promo code. 2. Apply.,Discount applied.,Medium,Major,Functional
+TC_CHECKOUT_007,Checkout,Order Summary,User on checkout,1. Review order summary.,All items, totals correct.,High,Critical,Functional
+TC_CHECKOUT_008,Checkout,Place Order,User completes checkout,1. Click 'Place Order'.,Order placed, confirmation page.,High,Critical,Functional
+TC_CHECKOUT_009,Checkout,Order Confirmation Email,After placing order,1. Check email.,Confirmation email received.,Medium,Major,Functional
+TC_CHECKOUT_010,Checkout,Guest Checkout,Guest user,1. Add to cart. 2. Checkout as guest.,Allowed to checkout without login.,Medium,Major,Functional
+TC_CHECKOUT_011,Checkout,Checkout with Multiple Items,User has multiple items,1. Proceed to checkout.,All items in order.,High,Critical,Functional
+TC_CHECKOUT_012,Checkout,Checkout Timeout,User on checkout,1. Wait for session timeout.,Redirected to login or error.,Medium,Major,Functional
+TC_CHECKOUT_013,Checkout,Edit Cart from Checkout,User on checkout,1. Click 'Edit Cart'.,Back to cart page.,Low,Minor,Functional
+TC_CHECKOUT_014,Checkout,Shipping Options,User on checkout,1. Select shipping method.,Cost updated.,Medium,Major,Functional
+TC_CHECKOUT_015,Checkout,Tax Calculation,User on checkout,1. Enter address.,Tax calculated correctly.,Medium,Major,Functional
+TC_CHECKOUT_016,Checkout,Order Notes,User on checkout,1. Add order notes. 2. Place order.,Notes saved with order.,Low,Minor,Functional
+TC_CHECKOUT_017,Checkout,Checkout with Saved Address,User has saved address,1. Select saved address.,Address auto-filled.,Medium,Minor,Functional
+TC_CHECKOUT_018,Checkout,Payment Failure,User on checkout,1. Use declined card. 2. Submit.,Payment failed message.,High,Major,Functional
+TC_CHECKOUT_019,Checkout,Checkout Validation,User skips steps,1. Try to place order without address.,Error: 'Complete all steps'.,Medium,Major,Validation
+TC_CHECKOUT_020,Checkout,Checkout Mobile View,User on mobile,1. Go through checkout.,UI responsive.,Low,Minor,UI
+TC_ORDER_001,Order,View Order History,User logged in,1. Go to profile > orders.,Order list displayed.,High,Critical,Functional
+TC_ORDER_002,Order,View Order Detail,User on order history,1. Click on order ID.,Order details shown.,High,Critical,Functional
+TC_ORDER_003,Order,Order Status Update,Order status changes,1. Check order status.,Updated status displayed.,Medium,Major,Functional
+TC_ORDER_004,Order,Order Cancellation,Order pending,1. Click 'Cancel Order'.,Order cancelled.,Medium,Major,Functional
+TC_ORDER_005,Order,Order Tracking,Order shipped,1. Enter tracking number.,Tracking info shown.,Medium,Major,Functional
+TC_ORDER_006,Order,Reorder,User on order detail,1. Click 'Reorder'.,Items added to cart.,Medium,Minor,Functional
+TC_ORDER_007,Order,Order Invoice Download,User on order detail,1. Click 'Download Invoice'.,PDF downloaded.,Low,Minor,Functional
+TC_ORDER_008,Order,Order Refund Request,Order delivered,1. Click 'Request Refund'.,Refund process started.,Medium,Major,Functional
+TC_ORDER_009,Order,Order Search,User on orders,1. Search by order ID.,Matching order shown.,Medium,Minor,Functional
+TC_ORDER_010,Order,Order Filter by Status,User on orders,1. Filter by 'Shipped'.,Filtered orders.,Medium,Minor,Functional
+TC_ORDER_011,Order,Order Pagination,Many orders,1. Navigate pages.,Correct orders per page.,Low,Minor,Functional
+TC_ORDER_012,Order,Order Email Notifications,Order status changes,1. Check email.,Status update email.,Medium,Major,Functional
+TC_ORDER_013,Order,Order with Multiple Items,User views order,1. Check items.,All items listed.,High,Critical,Functional
+TC_ORDER_014,Order,Order Total Accuracy,User views order,1. Check total.,Matches calculation.,High,Critical,Functional
+TC_ORDER_015,Order,Order Date Sorting,User on orders,1. Sort by date.,Orders sorted.,Low,Minor,Functional
+TC_ORDER_016,Order,Order Export,User on orders,1. Click 'Export'.,CSV downloaded.,Low,Minor,Functional
+TC_ORDER_017,Order,Order Dispute,Order issue,1. Click 'Dispute'.,Support ticket created.,Medium,Major,Functional
+TC_ORDER_018,Order,Order Return,Order eligible,1. Click 'Return'.,Return process.,Medium,Major,Functional
+TC_ORDER_019,Order,Order Gift Wrap,Order placed with gift,1. Check order.,Gift wrap noted.,Low,Minor,Functional
+TC_ORDER_020,Order,Order Bulk Actions,Admin on orders,1. Select multiple. 2. Bulk update.,Status updated.,Medium,Major,Functional
+TC_PROFILE_001,User Profile,View Profile,User logged in,1. Go to profile page.,Profile info displayed.,High,Critical,Functional
+TC_PROFILE_002,User Profile,Edit Profile,User on profile,1. Edit name, email. 2. Save.,Profile updated.,High,Critical,Functional
+TC_PROFILE_003,User Profile,Change Password,User on profile,1. Enter current and new password. 2. Save.,Password changed.,High,Critical,Functional
+TC_PROFILE_004,User Profile,Invalid Password Change,User on profile,1. Enter wrong current password. 2. Save.,Error message.,Medium,Major,Validation
+TC_PROFILE_005,User Profile,Upload Profile Picture,User on profile,1. Upload image. 2. Save.,Picture updated.,Medium,Minor,Functional
+TC_PROFILE_006,User Profile,Add Address,User on profile,1. Add new address. 2. Save.,Address saved.,Medium,Major,Functional
+TC_PROFILE_007,User Profile,Edit Address,User on profile,1. Edit address. 2. Save.,Address updated.,Medium,Major,Functional
+TC_PROFILE_008,User Profile,Delete Address,User on profile,1. Delete address.,Address removed.,Medium,Major,Functional
+TC_PROFILE_009,User Profile,View Wishlist,User on profile,1. Go to wishlist.,Wishlist items shown.,Medium,Minor,Functional
+TC_PROFILE_010,User Profile,Add to Wishlist,User on product,1. Click 'Add to Wishlist'.,Item added.,Low,Minor,Functional
+TC_PROFILE_011,User Profile,Remove from Wishlist,User on wishlist,1. Remove item.,Item removed.,Low,Minor,Functional
+TC_PROFILE_012,User Profile,Profile Privacy Settings,User on profile,1. Toggle privacy. 2. Save.,Settings updated.,Low,Minor,Functional
+TC_PROFILE_013,User Profile,Profile Validation,User edits profile,1. Leave required fields empty. 2. Save.,Validation errors.,Medium,Major,Validation
+TC_PROFILE_014,User Profile,Profile Email Verification,User changes email,1. Enter new email. 2. Verify via link.,Email updated.,Medium,Major,Functional
+TC_PROFILE_015,User Profile,Profile Mobile View,User on mobile,1. Access profile.,Responsive UI.,Low,Minor,UI
+TC_PROFILE_016,User Profile,Profile Accessibility,User uses screen reader,1. Navigate profile.,Accessible.,Low,Minor,Accessibility
+TC_PROFILE_017,User Profile,Profile Data Export,User on profile,1. Click 'Export Data'.,Data downloaded.,Low,Minor,Functional
+TC_PROFILE_018,User Profile,Profile Delete Account,User on profile,1. Click 'Delete Account'.,Confirmation required.,High,Major,Functional
+TC_PROFILE_019,User Profile,Profile Notifications,User on profile,1. Set notification prefs. 2. Save.,Prefs saved.,Low,Minor,Functional
+TC_PROFILE_020,User Profile,Profile Integration,User links social account,1. Link account.,Integrated.,Low,Minor,Functional
+TC_ADMIN_USER_001,Admin: User Management,View User List,Admin logged in,1. Go to user management.,User list displayed.,High,Critical,Functional
+TC_ADMIN_USER_002,Admin: User Management,Search User,Admin on user list,1. Search by email.,Matching users.,Medium,Major,Functional
+TC_ADMIN_USER_003,Admin: User Management,Edit User,Admin on user detail,1. Edit user info. 2. Save.,User updated.,High,Critical,Functional
+TC_ADMIN_USER_004,Admin: User Management,Delete User,Admin on user list,1. Select user. 2. Delete.,User removed.,High,Critical,Functional
+TC_ADMIN_USER_005,Admin: User Management,Add User,Admin on user management,1. Click add. 2. Fill form. 3. Save.,User created.,Medium,Major,Functional
+TC_ADMIN_USER_006,Admin: User Management,User Role Change,Admin edits user,1. Change role to admin. 2. Save.,Role updated.,High,Critical,Functional
+TC_ADMIN_USER_007,Admin: User Management,User Status Toggle,Admin on user,1. Toggle active/inactive.,Status changed.,Medium,Major,Functional
+TC_ADMIN_USER_008,Admin: User Management,Bulk User Actions,Admin selects multiple,1. Bulk delete.,Users deleted.,Medium,Major,Functional
+TC_ADMIN_USER_009,Admin: User Management,User Export,Admin on users,1. Export to CSV.,File downloaded.,Low,Minor,Functional
+TC_ADMIN_USER_010,Admin: User Management,User Filter,Admin on users,1. Filter by role.,Filtered list.,Medium,Minor,Functional
+TC_ADMIN_USER_011,Admin: User Management,User Pagination,Many users,1. Navigate pages.,Correct users.,Low,Minor,Functional
+TC_ADMIN_USER_012,Admin: User Management,User Validation,Admin adds user,1. Leave fields empty. 2. Save.,Errors.,Medium,Major,Validation
+TC_ADMIN_USER_013,Admin: User Management,User Audit Log,Admin views user,1. Check audit.,Changes logged.,Medium,Major,Functional
+TC_ADMIN_USER_014,Admin: User Management,User Impersonate,Admin on user,1. Click impersonate.,Logged as user.,High,Major,Functional
+TC_ADMIN_USER_015,Admin: User Management,User Password Reset,Admin on user,1. Reset password.,Reset email sent.,Medium,Major,Functional
+TC_ADMIN_USER_016,Admin: User Management,User Activity,Admin views user,1. Check activity log.,Log shown.,Low,Minor,Functional
+TC_ADMIN_USER_017,Admin: User Management,User Ban,Admin on user,1. Ban user.,User banned.,Medium,Major,Functional
+TC_ADMIN_USER_018,Admin: User Management,User Unban,Admin on banned user,1. Unban.,User active.,Medium,Major,Functional
+TC_ADMIN_USER_019,Admin: User Management,User Email,Admin on users,1. Send email to users.,Email sent.,Low,Minor,Functional
+TC_ADMIN_USER_020,Admin: User Management,User Statistics,Admin on dashboard,1. View user stats.,Stats accurate.,Low,Minor,Functional
+TC_ADMIN_PRODUCT_001,Admin: Product Management,View Product List,Admin logged in,1. Go to product management.,Product list.,High,Critical,Functional
+TC_ADMIN_PRODUCT_002,Admin: Product Management,Add Product,Admin on products,1. Click add. 2. Fill form. 3. Save.,Product created.,High,Critical,Functional
+TC_ADMIN_PRODUCT_003,Admin: Product Management,Edit Product,Admin on product,1. Edit details. 2. Save.,Product updated.,High,Critical,Functional
+TC_ADMIN_PRODUCT_004,Admin: Product Management,Delete Product,Admin on product,1. Delete.,Product removed.,High,Critical,Functional
+TC_ADMIN_PRODUCT_005,Admin: Product Management,Product Image Upload,Admin adds product,1. Upload image.,Image saved.,Medium,Major,Functional
+TC_ADMIN_PRODUCT_006,Admin: Product Management,Product Category Assign,Admin edits product,1. Assign category.,Category set.,Medium,Major,Functional
+TC_ADMIN_PRODUCT_007,Admin: Product Management,Product Stock Update,Admin on product,1. Update stock. 2. Save.,Stock updated.,High,Critical,Functional
+TC_ADMIN_PRODUCT_008,Admin: Product Management,Product Price Change,Admin edits product,1. Change price. 2. Save.,Price updated.,High,Critical,Functional
+TC_ADMIN_PRODUCT_009,Admin: Product Management,Product Bulk Edit,Admin selects multiple,1. Bulk update price.,Prices changed.,Medium,Major,Functional
+TC_ADMIN_PRODUCT_010,Admin: Product Management,Product Search,Admin on products,1. Search by name.,Results.,Medium,Minor,Functional
+TC_ADMIN_PRODUCT_011,Admin: Product Management,Product Filter,Admin on products,1. Filter by category.,Filtered.,Medium,Minor,Functional
+TC_ADMIN_PRODUCT_012,Admin: Product Management,Product Export,Admin on products,1. Export.,CSV downloaded.,Low,Minor,Functional
+TC_ADMIN_PRODUCT_013,Admin: Product Management,Product Import,Admin on products,1. Import CSV.,Products added.,Medium,Major,Functional
+TC_ADMIN_PRODUCT_014,Admin: Product Management,Product Validation,Admin adds product,1. Leave required empty. 2. Save.,Errors.,Medium,Major,Validation
+TC_ADMIN_PRODUCT_015,Admin: Product Management,Product Duplicate,Admin on product,1. Click duplicate.,New product created.,Low,Minor,Functional
+TC_ADMIN_PRODUCT_016,Admin: Product Management,Product SEO,Admin edits product,1. Set meta tags.,Tags saved.,Low,Minor,Functional
+TC_ADMIN_PRODUCT_017,Admin: Product Management,Product Variants,Admin on product,1. Add variants.,Variants saved.,Medium,Major,Functional
+TC_ADMIN_PRODUCT_018,Admin: Product Management,Product Reviews,Admin views product,1. See reviews.,Reviews listed.,Low,Minor,Functional
+TC_ADMIN_PRODUCT_019,Admin: Product Management,Product Analytics,Admin on product,1. View stats.,Stats shown.,Low,Minor,Functional
+TC_ADMIN_PRODUCT_020,Admin: Product Management,Product Archive,Admin on product,1. Archive.,Product hidden.,Medium,Minor,Functional
+TC_ADMIN_ORDER_001,Admin: Order Management,View Order List,Admin logged in,1. Go to orders.,Order list.,High,Critical,Functional
+TC_ADMIN_ORDER_002,Admin: Order Management,View Order Detail,Admin on order,1. Click order.,Details shown.,High,Critical,Functional
+TC_ADMIN_ORDER_003,Admin: Order Management,Update Order Status,Admin on order,1. Change status. 2. Save.,Status updated.,High,Critical,Functional
+TC_ADMIN_ORDER_004,Admin: Order Management,Order Search,Admin on orders,1. Search by ID.,Order found.,Medium,Major,Functional
+TC_ADMIN_ORDER_005,Admin: Order Management,Order Filter,Admin on orders,1. Filter by status.,Filtered.,Medium,Minor,Functional
+TC_ADMIN_ORDER_006,Admin: Order Management,Order Export,Admin on orders,1. Export.,CSV.,Low,Minor,Functional
+TC_ADMIN_ORDER_007,Admin: Order Management,Order Refund,Admin on order,1. Process refund.,Refund done.,High,Major,Functional
+TC_ADMIN_ORDER_008,Admin: Order Management,Order Cancellation,Admin on order,1. Cancel.,Order cancelled.,High,Major,Functional
+TC_ADMIN_ORDER_009,Admin: Order Management,Order Notes,Admin on order,1. Add note.,Note saved.,Medium,Minor,Functional
+TC_ADMIN_ORDER_010,Admin: Order Management,Order Tracking,Admin on order,1. Add tracking.,Tracking updated.,Medium,Major,Functional
+TC_ADMIN_ORDER_011,Admin: Order Management,Order Bulk Update,Admin selects orders,1. Bulk status change.,Updated.,Medium,Major,Functional
+TC_ADMIN_ORDER_012,Admin: Order Management,Order Email,Admin on order,1. Send email.,Email sent.,Low,Minor,Functional
+TC_ADMIN_ORDER_013,Admin: Order Management,Order Statistics,Admin on dashboard,1. View order stats.,Accurate.,Low,Minor,Functional
+TC_ADMIN_ORDER_014,Admin: Order Management,Order Fraud Check,Admin on suspicious order,1. Flag as fraud.,Order blocked.,High,Major,Functional
+TC_ADMIN_ORDER_015,Admin: Order Management,Order Dispute,Admin on dispute,1. Resolve.,Dispute closed.,Medium,Major,Functional
+TC_ADMIN_ORDER_016,Admin: Order Management,Order Return,Admin on return,1. Approve.,Return processed.,Medium,Major,Functional
+TC_ADMIN_ORDER_017,Admin: Order Management,Order Invoice,Admin on order,1. Generate invoice.,PDF created.,Low,Minor,Functional
+TC_ADMIN_ORDER_018,Admin: Order Management,Order Payment,Admin on order,1. View payment details.,Details shown.,Medium,Major,Functional
+TC_ADMIN_ORDER_019,Admin: Order Management,Order Shipping,Admin on order,1. Update shipping.,Updated.,Medium,Major,Functional
+TC_ADMIN_ORDER_020,Admin: Order Management,Order History,Admin on order,1. View history.,Log shown.,Low,Minor,Functional
+TC_REVIEW_001,Review & Rating,View Product Reviews,User on product detail,1. Scroll to reviews.,Reviews displayed.,Medium,Major,Functional
+TC_REVIEW_002,Review & Rating,Add Review,User purchased product,1. Click 'Write Review'. 2. Rate and comment. 3. Submit.,Review added.,High,Critical,Functional
+TC_REVIEW_003,Review & Rating,Edit Review,User on own review,1. Edit review. 2. Save.,Review updated.,Medium,Major,Functional
+TC_REVIEW_004,Review & Rating,Delete Review,User on own review,1. Delete.,Review removed.,Medium,Major,Functional
+TC_REVIEW_005,Review & Rating,Review Validation,User adds review,1. Submit empty.,Error.,Medium,Major,Validation
+TC_REVIEW_006,Review & Rating,Review Moderation,Admin on reviews,1. Approve review.,Review published.,Medium,Major,Functional
+TC_REVIEW_007,Review & Rating,Review Filter,User on reviews,1. Filter by rating.,Filtered.,Low,Minor,Functional
+TC_REVIEW_008,Review & Rating,Review Sort,User on reviews,1. Sort by date.,Sorted.,Low,Minor,Functional
+TC_REVIEW_009,Review & Rating,Review Pagination,Many reviews,1. Navigate.,Correct.,Low,Minor,Functional
+TC_REVIEW_010,Review & Rating,Review Images,User adds review,1. Upload image.,Image attached.,Low,Minor,Functional
+TC_REVIEW_011,Review & Rating,Review Helpful,User on review,1. Click helpful.,Count increases.,Low,Minor,Functional
+TC_REVIEW_012,Review & Rating,Review Report,User on review,1. Report.,Admin notified.,Medium,Major,Functional
+TC_REVIEW_013,Review & Rating,Review Average,User views product,1. Check average rating.,Correct calculation.,Medium,Major,Functional
+TC_REVIEW_014,Review & Rating,Review Notification,User reviews,1. Submit.,Seller notified.,Low,Minor,Functional
+TC_REVIEW_015,Review & Rating,Review Search,User on reviews,1. Search reviews.,Matching.,Low,Minor,Functional
+TC_REVIEW_016,Review & Rating,Review Export,Admin on reviews,1. Export.,CSV.,Low,Minor,Functional
+TC_REVIEW_017,Review & Rating,Review Bulk,Admin selects reviews,1. Bulk delete.,Deleted.,Medium,Major,Functional
+TC_REVIEW_018,Review & Rating,Review Analytics,Admin on dashboard,1. View review stats.,Accurate.,Low,Minor,Functional
+TC_REVIEW_019,Review & Rating,Review Integration,Review from social,1. Import.,Added.,Low,Minor,Functional
+TC_REVIEW_020,Review & Rating,Review Accessibility,User with disability,1. Access reviews.,Accessible.,Low,Minor,Accessibility
+TC_NOTIF_001,Notification,Email Notification,User subscribes,1. Trigger event (e.g., order).,Email sent.,Medium,Major,Functional
+TC_NOTIF_002,Notification,SMS Notification,User opts in,1. Trigger.,SMS sent.,Medium,Major,Functional
+TC_NOTIF_003,Notification,In-App Notification,User logged in,1. Trigger.,Notification shown.,Low,Minor,Functional
+TC_NOTIF_004,Notification,Notification Settings,User on profile,1. Update prefs. 2. Save.,Prefs saved.,Medium,Minor,Functional
+TC_NOTIF_005,Notification,Notification History,User on notifications,1. View history.,List shown.,Low,Minor,Functional
+TC_NOTIF_006,Notification,Notification Mark Read,User on notification,1. Mark read.,Status updated.,Low,Minor,Functional
+TC_NOTIF_007,Notification,Notification Bulk,User selects multiple,1. Mark all read.,Updated.,Low,Minor,Functional
+TC_NOTIF_008,Notification,Notification Push,User allows push,1. Trigger.,Push received.,Medium,Major,Functional
+TC_NOTIF_009,Notification,Notification Unsubscribe,User on email,1. Unsubscribe.,No more emails.,Medium,Major,Functional
+TC_NOTIF_010,Notification,Notification Frequency,User sets frequency,1. Save.,Applied.,Low,Minor,Functional
+TC_NOTIF_011,Notification,Notification Template,Admin edits template,1. Save.,Updated.,Medium,Major,Functional
+TC_NOTIF_012,Notification,Notification Queue,Many notifications,1. Check queue.,Processed.,Low,Minor,Functional
+TC_NOTIF_013,Notification,Notification Analytics,Admin on dashboard,1. View stats.,Accurate.,Low,Minor,Functional
+TC_NOTIF_014,Notification,Notification Test,Admin sends test,1. Send.,Received.,Medium,Major,Functional
+TC_NOTIF_015,Notification,Notification Failure,Invalid email,1. Trigger.,Error logged.,Low,Minor,Functional
+TC_NOTIF_016,Notification,Notification Retry,Failure,1. Retry.,Sent.,Low,Minor,Functional
+TC_NOTIF_017,Notification,Notification Archive,Old notifications,1. Archive.,Moved.,Low,Minor,Functional
+TC_NOTIF_018,Notification,Notification Search,User on notifications,1. Search.,Results.,Low,Minor,Functional
+TC_NOTIF_019,Notification,Notification Export,Admin exports,1. Export.,CSV.,Low,Minor,Functional
+TC_NOTIF_020,Notification,Notification Integration,With third party,1. Integrate.,Works.,Low,Minor,Functional

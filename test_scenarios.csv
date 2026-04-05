@@ -1,0 +1,12 @@
+Scenario ID,Scenario Name,Description,Test Cases Covered,Priority,Severity
+SC_AUTH_001,User Authentication Flow,Test complete login and registration process,TC_AUTH_001 to TC_AUTH_020,High,Critical
+SC_PROD_001,Product Browsing and Search,Test viewing, searching, filtering products,TC_PROD_001 to TC_PROD_020,High,Critical
+SC_CART_001,Cart Management,Test adding, updating, removing cart items,TC_CART_001 to TC_CART_020,High,Critical
+SC_CHECKOUT_001,Checkout Process,Test full checkout from cart to order,TC_CHECKOUT_001 to TC_CHECKOUT_020,High,Critical
+SC_ORDER_001,Order Management,Test order history, tracking, management,TC_ORDER_001 to TC_ORDER_020,High,Critical
+SC_PROFILE_001,User Profile Management,Test profile editing, addresses, wishlist,TC_PROFILE_001 to TC_PROFILE_020,Medium,Major
+SC_ADMIN_USER_001,Admin User Management,Test CRUD operations on users,TC_ADMIN_USER_001 to TC_ADMIN_USER_020,High,Critical
+SC_ADMIN_PRODUCT_001,Admin Product Management,Test product CRUD, inventory,TC_ADMIN_PRODUCT_001 to TC_ADMIN_PRODUCT_020,High,Critical
+SC_ADMIN_ORDER_001,Admin Order Management,Test order processing, refunds,TC_ADMIN_ORDER_001 to TC_ADMIN_ORDER_020,High,Critical
+SC_REVIEW_001,Review and Rating System,Test reviews, ratings, moderation,TC_REVIEW_001 to TC_REVIEW_020,Medium,Major
+SC_NOTIF_001,Notification System,Test email, SMS, in-app notifications,TC_NOTIF_001 to TC_NOTIF_020,Medium,Major
