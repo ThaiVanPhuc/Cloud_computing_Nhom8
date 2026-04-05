@@ -5,22 +5,22 @@
   margin: 20px auto;
   padding: 15px 25px;
   border-radius: 20px;
-  background-image: url('https://example.com/blue-background.jpg'); /* Placeholder, change to blue image */
+  background-image: url('https://thuthuatnhanh.com/wp-content/uploads/2021/05/hinh-nen-mau-hong-phan-dep-nhe-nhang.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  color: #ffffff;
+  color: #1b1b1b;
 
   /* Nền tối mờ phủ nhẹ để chữ dễ nhìn */
   backdrop-filter: blur(4px);
-  background-color: rgba(30, 58, 138, 0.55);
+  background-color: rgba(0, 0, 0, 0.55);
 }
 
 .signup-container h2 {
   text-align: center;
   margin-bottom: 15px;
-  color: #ffffff;
+  color: #181717;
   font-size: 28px;
   font-weight: 600;
 }
@@ -34,7 +34,7 @@ form {
 /* Label */
 label {
   font-weight: 500;
-  color: #e5e7eb;
+  color: #464444;
   margin-bottom: 3px;
 }
 

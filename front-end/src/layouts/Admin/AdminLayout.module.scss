@@ -3,7 +3,7 @@
 .adminLayout {
     display: flex;
     min-height: 100vh;
-    background: linear-gradient(135deg, #1e3a8a 0%, #111827 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     position: relative;
     overflow: hidden;
 
@@ -35,7 +35,7 @@
 
 .sidebar {
     width: 280px;
-    background: rgba(31, 41, 55, 0.95);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border-right: 1px solid rgba(255, 255, 255, 0.3);
     display: flex;

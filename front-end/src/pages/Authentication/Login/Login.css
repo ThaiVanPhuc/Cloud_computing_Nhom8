@@ -7,7 +7,7 @@
   margin: 50px auto;
   border-radius: 30px; /* bo góc lớn hơn */
   overflow: hidden;
-  background: rgba(31, 41, 55, 0.15); /* nền trong suốt nhẹ */
+  background: rgba(255, 255, 255, 0.15); /* nền trong suốt nhẹ */
   backdrop-filter: blur(10px); /* tạo hiệu ứng mờ nền */
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25); /* bóng nổi */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -38,7 +38,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(180deg, rgba(59, 130, 246, 0.9), rgba(30, 58, 138, 0.9));
+  background: linear-gradient(180deg, rgba(241, 170, 194, 0.9), rgba(250, 222, 233, 0.9));
   border-radius: 0 30px 30px 0; /* bo góc phải */
   backdrop-filter: blur(5px);
 }
