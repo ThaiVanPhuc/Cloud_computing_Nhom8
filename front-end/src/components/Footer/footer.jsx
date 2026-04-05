@@ -138,7 +138,7 @@ const Footer = () => {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  Group 8
+                  PucShop
                 </h4>
                 <p
                   style={{
@@ -228,9 +228,7 @@ const Footer = () => {
                   }}
                 >
                   {[
-                    "Thái Văn Phúc",
-                    "Nguyễn Lê Văn Hồng Phúc",
-                    "Nguyễn Thanh Phong",
+                    "Thái Văn Phúc"
                   ].map((name, index) => (
                     <span
                       key={index}
@@ -346,7 +344,7 @@ const Footer = () => {
                 >
                   <li style={{ marginBottom: "8px" }}>
                     <strong style={{ color: "#ffd700" }}>📧 Email:</strong>{" "}
-                    group8@shoptech.vn
+                    puc@shoptech.vn
                   </li>
                   <li style={{ marginBottom: "8px" }}>
                     <strong style={{ color: "#ffd700" }}>📞 Hotline:</strong>{" "}
@@ -420,7 +418,7 @@ const Footer = () => {
             animation: "pulse 2s ease-in-out infinite",
           }}
         >
-          © 2025 Group 8. All rights reserved. ✨
+          © 2025 PucShop. All rights reserved. ✨
         </p>
       </div>
     </footer>
