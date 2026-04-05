@@ -4,10 +4,10 @@
 }
 
 .footer-bubble {
-  background: linear-gradient(180deg, #ffe7df 0%, #f2d6d6 50%, #fddfdd 100%);
+  background: linear-gradient(180deg, #1e3a8a 0%, #374151 50%, #1f2937 100%);
   width: 100%;
   padding: 60px 30px 40px 30px;
-  box-shadow: 0 5px 15px rgb(255, 209, 217) rgba(216, 120, 120, 0.1); /* Nổi lên */
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
 }
 
 .footer-bubble .social-icon:hover {
@@ -16,27 +16,27 @@
 }
 
 .footer-bottom {
-  background-color: #524f4f;
+  background-color: #111827;
   color: #fff;
   font-size: 0.9rem;
 }
 /* Link các trang */
 .page-link-hover {
-  color: #f0acac; /* Màu bình thường */
+  color: #9ca3af; /* Màu bình thường */
   transition: all 0.3s ease;
   position: relative;
 }
 
 /* Hover */
 .page-link-hover:hover {
-  color: #fbd9d6; /* Màu nổi bật khi hover */
+  color: #60a5fa; /* Màu nổi bật khi hover */
   font-weight: 600;
   transform: translateY(-2px); /* Nhích lên nhẹ */
 }
 
 /* Khi active (ví dụ khi đang ở trang đó) */
 .page-link-hover.active {
-  color: #ff3b2e; /* Màu nổi bật hơn */
+  color: #3b82f6; /* Màu nổi bật hơn */
   font-weight: 700;
 }
 .
